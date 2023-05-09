@@ -168,6 +168,15 @@ static inline int MostProducts(R_LIST resources, T_LIST transformations, int pro
 	return leastSoFar;
 };
 
+// Using product recipe, list out required ingredites
+// Starting from top ingredient, contstruct required number
+// If all ingredients are successfully constructed, there are enough
+// Repeat until convergence
+
+
+
+
+
 
 int main() {
 	std::ios_base::sync_with_stdio(false);

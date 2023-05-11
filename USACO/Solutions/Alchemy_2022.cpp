@@ -54,8 +54,7 @@ static inline T_LIST GetGiven() {
 			// Reactants stored by index and not id
 			recipe.reactants.push_back(--reactant);
 		}
-
-		//GivenTransformations.transformations.push_back(recipe);
+			
 		GivenTransformations.transformations[product] = recipe;
 
 		// Add transformation
@@ -64,18 +63,6 @@ static inline T_LIST GetGiven() {
 	return GivenTransformations;
 
 }
-
-
-
-
-static inline void UndoTransformation(R_LIST* resources, Transformation transformation) {
-	for (int reactantindex = 0; reactantindex < transformation.reactantcount; ++reactantindex) {
-		++(*resources)[transformation.reactants[reactantindex]];
-	}
-	--(*resources)[transformation.product];
-};
-
-
 
 
 static inline R_LIST TransformationToResource(Transformation* transformation, int prodNum) {

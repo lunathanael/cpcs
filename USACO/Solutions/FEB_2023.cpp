@@ -40,30 +40,26 @@ vector<int> output;
 // ff1
 // 1, +c
 
-
-
 void GenerateLevels() {
-	sort(poss.begin(), poss.end());
+	output.push_back(excitement);
 	if (poss.size() == 0) {
-		output.push_back(excitement);
 		return;
 	}
-	bool canCount = (poss[0] == 1);
-	output.push_back(excitement);
-	if (canCount) {
-		int i = 0;
-		while (poss[i] == 1) {
-			++excitement;
-			output.push_back(excitement);
-			++i;
+	if (find(poss.begin(), poss.end(), 1) != poss.end())
+	{
+		for (int i = 0; i < poss.size(); ++i) {
+			if (poss[i] == 1) {
+				++excitement;
+				output.push_back(excitement);
+			}
+			else {
+				++excitement;
+				output.push_back(excitement);
+				++excitement;
+				output.push_back(excitement);
+			}
 		}
-		while (i < poss.size()) {
-			++excitement;
-			output.push_back(excitement);
-			++excitement;
-			output.push_back(excitement);
-			++i;
-		}
+		// there is a one
 	}
 	else {
 		for (int i = 0; i < poss.size(); ++i) {
@@ -71,7 +67,6 @@ void GenerateLevels() {
 			output.push_back(excitement);
 		}
 	}
-
 }
 
 int main() {

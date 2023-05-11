@@ -75,7 +75,7 @@ int main() {
 	int counter = 0;
 
 	char chainStart;
-	char sender, prevSender, nextSender;
+	char sender, prevSender;
 
 
 	sender = conversation.at(0);
@@ -108,18 +108,17 @@ int main() {
 						if (sender == chainStart) {
 							++excitement;
 						}
-						counter = counter / 2;
 
 					}
 					else {
 						if (sender != chainStart) {
 							++excitement;
-							counter = (counter - 1) / 2;
 						}
 						else {
-							counter = (counter + 1) / 2;
+							++counter;
 						}
 					}
+					counter = counter / 2;
 					for (int i = 0; i < counter; ++ i) {
 						poss.push_back(2);
 					}

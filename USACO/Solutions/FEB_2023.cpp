@@ -26,10 +26,11 @@ int main() {
 
 
 	chainStart = 'N';
+	sender = conversation.at(0);
 
 	for (int i = 1; i < conversationLength; ++i) {
 
-		prevSender = conversation.at(i - 1);
+		prevSender = sender;
 		sender = conversation.at(i);
 
 		if (sender != 'F') {

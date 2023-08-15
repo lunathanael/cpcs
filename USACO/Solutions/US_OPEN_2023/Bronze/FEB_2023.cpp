@@ -38,10 +38,7 @@ int main() {
 				++excitement;
 			}
 
-
 			else if (prevSender == 'F') {
-
-
 
 				if (chainStart == 'N') {
 					++possExc;

@@ -15,6 +15,7 @@ int main() {
 	for (int i = 0; i < K; ++i) {
 		cin >> swap_map[i];
 	}
+
 	for (int i = 0; i < (K-1); ++i) {
 		int cycle_time = swap_map[i + 1] - swap_map[i];
 		while (current_cow_index < swap_map[i+1]) {

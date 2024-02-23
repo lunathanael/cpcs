@@ -40,5 +40,31 @@ struct hash_pair {
 
 int main()
 {
+    int N;
+    cin >> N;
+
+    ll dec = 0;
+    ll inc = 0;
+    ll change = 0;
+    for(int i = 0; i < N; ++i)
+    {
+        ll level;
+        cin >> level;
+        level += change;
+        if(level != 0)
+        {
+            if(level > 0)
+            {
+                dec += level;
+            }
+            else
+            {
+                inc -= level;
+            }
+            change -= level;
+        }
+        change += (inc - dec);
+    }
+    cout << (inc + dec) << endl;
     return 0;
 }

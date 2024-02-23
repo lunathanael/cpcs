@@ -1,5 +1,5 @@
 SRCS=$(wildcard *.cpp)
-NAME=run
+NAME=a
 
 all :
 	g++ -Og $(SRCS) -o $(NAME)

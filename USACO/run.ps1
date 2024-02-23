@@ -21,13 +21,17 @@ if ($check) {
     $expectedLines = Get-Content output.txt
     $actualLines = Get-Content $tempFile
     $maxLength = [Math]::Max($expectedLines.Length, $actualLines.Length)
+    $differencesFound = $False
 
-    Write-Host "Comparing expected and actual outputs line by line:"
     for ($i = 0; $i -lt $maxLength; $i++) {
         $expectedLine = $expectedLines[$i]
         $actualLine = $actualLines[$i]
 
         if ($expectedLine -ne $actualLine) {
+            if (-not $differencesFound) {
+                Write-Host "Differences found:"
+                $differencesFound = $true
+            }
             if ($actualLine -ne $null) {
                 Write-Host "Actual (line $(($i + 1)))    >>" -ForegroundColor Red -NoNewline
                 Write-Host "$actualLine\n"
@@ -37,6 +41,9 @@ if ($check) {
                 Write-Host "$expectedLine\n"
             }
         }
+    }
+    if (-not $differencesFound) {
+        Write-Host "No differences found."
     }
     
     Remove-Item $tempFile

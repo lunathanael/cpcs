@@ -18,13 +18,25 @@ if ($check) {
     $tempFile = "temp_output.txt"
     $output | Out-File $tempFile
     
-    $compareResult = Compare-Object -ReferenceObject (Get-Content output.txt) -DifferenceObject (Get-Content $tempFile)
-    
-    if ($compareResult) {
-        Write-Host "Differences found between output.txt"
-        $compareResult | ForEach-Object { Write-Host $_.InputObject }
-    } else {
-        Write-Host "No differences found. Outputs are identical."
+    $expectedLines = Get-Content output.txt
+    $actualLines = Get-Content $tempFile
+    $maxLength = [Math]::Max($expectedLines.Length, $actualLines.Length)
+
+    Write-Host "Comparing expected and actual outputs line by line:"
+    for ($i = 0; $i -lt $maxLength; $i++) {
+        $expectedLine = $expectedLines[$i]
+        $actualLine = $actualLines[$i]
+
+        if ($expectedLine -ne $actualLine) {
+            if ($actualLine -ne $null) {
+                Write-Host "Actual (line $(($i + 1)))    >>" -ForegroundColor Red -NoNewline
+                Write-Host "$actualLine\n"
+            }
+            if ($expectedLine -ne $null) {
+                Write-Host "Expected (line $(($i + 1)))  <<" -ForegroundColor Green -NoNewline
+                Write-Host "$expectedLine\n"
+            }
+        }
     }
     
     Remove-Item $tempFile

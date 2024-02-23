@@ -37,3 +37,8 @@ struct hash_pair {
           return hash1;
     }
 };
+
+int main()
+{
+    return 0;
+}

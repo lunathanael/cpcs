@@ -1,8 +1,8 @@
-SRCS=$(wildcard *.cpp)
 NAME=a
+SRC ?= $(wildcard *.cpp)
 
 all :
-	g++ -Og $(SRCS) -o $(NAME)
-fast :
-	g++ -Ofast $(SRCS) -o $(NAME)
+	g++ -Og $(SRC) -o $(NAME)
 
+fast :
+	g++ -Ofast $(SRC) -o $(NAME)

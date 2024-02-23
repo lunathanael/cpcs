@@ -34,22 +34,28 @@ int main()
     {
         int n;
         cin >> n;
-        vector<int> cows(n);
+        vector<vector<int>> cows(n+1, vector<int>{});
         for(int i = 0; i < n; ++i)
         {
-            cin >> cows[i];
+            int temp;
+            cin >> temp;
+            cows[temp].push_back(i);
         }
-        set<int>poss;
+        vector<int> poss;
 
-        for(int i = 0; i < n; ++i)
+        for(int i = 1; i <= n; ++i)
         {
-            vector<int> occ(n+1, 0);
-            for(int j = i; j < n; ++j)
+            bool found = false;
+            for(int j = 0; !found && j < cows[i].size(); ++j)
             {
-                occ[cows[j]]++;
-                if(occ[cows[j]] != 1 && occ[cows[j]] > (j-i+1)/2)
+                for(int k = j + 1; !found && k < cows[i].size(); ++k)
                 {
-                    poss.insert(cows[j]);
+                    if ((k-j+1)*2 > (cows[i][k] - cows[i][j] + 1))
+                    {
+                        poss.push_back(i);
+                        found=true;
+                        break;
+                    }
                 }
             }
         }

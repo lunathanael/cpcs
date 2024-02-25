@@ -66,32 +66,41 @@ void solve()
     }
 
     // Check conditions for B
-    for (int i = 1; i <= N; ++i)
+    int curr_ind = 1;
+    while(curr_ind <= N)
     {
-        // Ensure that every j such that i < j < B[i] has B[j] = B[i]
-        for(int j = i; j < B[i]; ++j)
+        int i = curr_ind;
+        while(curr_ind < B[i])
         {
-            if(B[j] != 0 && B[j] != B[i])
+            if(B[curr_ind] != 0 && B[curr_ind] != B[i])
             {
                 cout << -1 << endl;
                 return;
             }
-            B[j] = B[i];
+            B[curr_ind] = B[i];
+            ++curr_ind;
         }
+        curr_ind = max(curr_ind, i+1);
     }
 
-    for(int i = 1; i <= N; ++i)
+
+    int mx_before = 0;
+    int mx_after = 0;
+    int i = 1;
+    while(i <= N)
     {
+        mx_before = max(mx_before, list[i]);
+        mx_after = max(mx_after, list[i]);
         if(B[i] == 0)
         {
+            ++i;
             continue;
         }
-        int mx_before = *max_element(list.begin(), list.begin() + i + 1);
-        int mx_after = *max_element(list.begin(), list.begin() + B[i]);
+        mx_after = max(mx_after, *max_element(list.begin() + i, list.begin() + B[i]));
 
         if (mx_after > mx_before)
         {
-            bool assignment_found = false;
+            bool found = false;
             for(int j = i; j > 0; --j)
             {
                 if(B[j] != 0 && B[j] < B[i])
@@ -103,41 +112,42 @@ void solve()
                 {
                     continue;
                 }
+                found = true;
                 list[j] = mx_after;
-                assignment_found = true;
                 break;
             }
-            if(assignment_found == false)
+            if(found == false)
             {
                 cout << -1 << endl;
                 return;
             }
             mx_before = mx_after;
         }
-        if (!assigned[B[i]])
+        if(!assigned[B[i]])
         {
             list[B[i]] = mx_before + 1;
         }
-        if (list[B[i]] <= mx_before)
+        if(list[B[i]] <= mx_before)
         {
             cout << -1 << endl;
             return;
         }
+        i = B[i];
     }
 
-    if(any_of(list.begin(), list.end(), [&](const int & i)
+    if(any_of(list.begin(), list.end(), [&](const int & j)
     {
-        return i > C;
+        return j > C;
     }))
     {
         cout << -1 << endl;
         return;
     }
 
-    for(int i = 1; i <= N; ++i)
+    for(int j = 1; j <= N; ++j)
     {
-        cout << list[i];
-        if(i != N)
+        cout << list[j];
+        if(j != N)
         {
             cout << ' ';
         }
@@ -145,7 +155,6 @@ void solve()
     cout << endl;
 }
 
-// problem seems like segmented tree problem, time=O(TQlog(n))
 int main()
 {
     int T;

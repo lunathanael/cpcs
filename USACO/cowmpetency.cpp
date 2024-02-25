@@ -38,38 +38,111 @@ struct hash_pair {
     }
 };
 
-bool satisfies(vector<int> & list, vector<pair<int, int>> & q, const int & Q)
+void solve()
 {
+    int N, Q, C;
+    cin >> N >> Q >> C;
+    vector<int> list(N+1, 0);
+    for(int i = 1; i <= N; ++i)
+    {
+        cin >> list[i];
+    }
+    vector<int> B(N+1, 0);
     for(int i = 0; i < Q; ++i)
     {
-        int a = q[i].first - 1, b = q[i].second - 1;
-        int mx1 = 0;
-        for(int j = 0; j <= a; ++j)
-            mx1 = max(mx1, abs(list[j]));
-        int mx2 = 0;
-        for(int j = a+1; j < b; ++j)
-            mx2 = max(mx2, abs(list[j]));
-        if(mx2 > mx1)
-            return false;
-        if(abs(list[b]) <= mx1)
-            return false;
+        int a_i, h_i;
+        cin >> a_i >> h_i;
+        B[a_i] = h_i;
     }
-    return true;
-}
 
-bool next_ar(vector<int>&list, const int & N, const int & C)
-{
-    for(int i = N-1; i >= 0; --i)
+    vector<char> assigned(N+1, 1);
+    for(int i = 1; i <= N; ++i)
     {
-        if(list[i] < 0 && list[i] != -C)
+        if(list[i] == 0)
         {
-            --list[i];
-            for(int j = i+1; j < N; ++j)
-                list[j] = max(list[j], -1);
-            return true;
+            list[i] = 1;
+            assigned[i] = 0;
         }
     }
-    return false;
+
+    // Check conditions for B
+    for (int i = 1; i <= N; ++i)
+    {
+        // Ensure that every j such that i < j < B[i] has B[j] = B[i]
+        for(int j = i; j < B[i]; ++j)
+        {
+            if(B[j] != 0 && B[j] != B[i])
+            {
+                cout << -1 << endl;
+                return;
+            }
+            B[j] = B[i];
+        }
+    }
+
+    for(int i = 1; i <= N; ++i)
+    {
+        if(B[i] == 0)
+        {
+            continue;
+        }
+        int mx_before = *max_element(list.begin(), list.begin() + i + 1);
+        int mx_after = *max_element(list.begin(), list.begin() + B[i]);
+
+        if (mx_after > mx_before)
+        {
+            bool assignment_found = false;
+            for(int j = i; j > 0; --j)
+            {
+                if(B[j] != 0 && B[j] < B[i])
+                {
+                    cout << -1 << endl;
+                    return;
+                }
+                if(assigned[j])
+                {
+                    continue;
+                }
+                list[j] = mx_after;
+                assignment_found = true;
+                break;
+            }
+            if(assignment_found == false)
+            {
+                cout << -1 << endl;
+                return;
+            }
+            mx_before = mx_after;
+        }
+        if (!assigned[B[i]])
+        {
+            list[B[i]] = mx_before + 1;
+        }
+        if (list[B[i]] <= mx_before)
+        {
+            cout << -1 << endl;
+            return;
+        }
+    }
+
+    if(any_of(list.begin(), list.end(), [&](const int & i)
+    {
+        return i > C;
+    }))
+    {
+        cout << -1 << endl;
+        return;
+    }
+
+    for(int i = 1; i <= N; ++i)
+    {
+        cout << list[i];
+        if(i != N)
+        {
+            cout << ' ';
+        }
+    }
+    cout << endl;
 }
 
 // problem seems like segmented tree problem, time=O(TQlog(n))
@@ -79,52 +152,7 @@ int main()
     cin >> T;
     while(T--)
     {
-        int N, Q, C;
-        cin >> N >> Q >> C;
-        vector<int> list(N);
-        for(int i = 0; i < N; ++i)
-        {
-            cin >> list[i];
-        }
-        vector<pair<int, int>> q(Q);
-        for(int i = 0; i < Q; ++i)
-        {
-            cin >> q[i].first >> q[i].second;
-        }
-        bool poss = false;
-
-        //
-        for(int i = 0; i < N; ++i)
-        {
-            if(list[i] == 0)
-                list[i] = -1;
-        }
-
-        do
-        {
-            if(satisfies(list, q, Q))
-            {
-                poss = true;
-                break;
-            }
-        }
-        while(next_ar(list, N, C));
-        //
-
-        if(poss)
-        {
-            for(int i = 0; i < N; ++i)
-            {
-                cout << abs(list[i]);
-                if(i != N-1)
-                    cout << ' ';
-            }
-            cout << endl;
-        }
-        else
-        {
-            cout << -1 << endl;
-        }
+        solve();
     }
 
     return 0;

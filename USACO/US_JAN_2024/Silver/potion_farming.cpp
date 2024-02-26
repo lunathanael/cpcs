@@ -38,13 +38,14 @@ struct hash_pair {
     }
 };
 
-static constexpr int MAXN = static_cast<int>(2e5);
+static constexpr int MAXN = static_cast<int>(1e5 + 1);
 
 int N;
 vector<int> adj[MAXN];
-int parent[MAXN];
 int potions[MAXN];
 int reachable[MAXN];
+
+int C_i[MAXN];
 
 void input()
 {
@@ -62,16 +63,22 @@ void input()
     }
 }
 
-void dfs(int v)
+int dfs(int v, int parent = 0)
 {
+    if(adj[v].size() == 1 && v != 1)
+    {
+        C_i[v] = 1;
+        return 1;
+    }
+    int sum = 0;
     for(auto & u : adj[v])
     {
-        if(u != parent[v])
+        if(u != parent)
         {
-            parent[u] = v;
-            dfs(u);
+            sum += dfs(u, v);
         }
     }
+    return C_i[v] = sum;
 }
 
 void process()
@@ -87,31 +94,19 @@ void process()
     }
 }
 
-bool grab(int v)
-{
-    while(v>0)
-    {
-        if(reachable[v] > 0)
-        {
-            reachable[v]--;
-            return 1;
-        }
-        v = parent[v];
-    }
-    return 0;
-}
 
-int solve()
+int solve1(int v, int parent = 0)
 {
-    int pots = 0;
-    for(int i = 2; i <= N; ++i)
+
+    int sum = reachable[v];
+    for(int & u : adj[v])
     {
-        if(adj[i].size() == 1)
+        if(parent != u)
         {
-            pots += grab(i);
+            sum += solve1(u, v);
         }
     }
-    return pots;
+    return min(sum, C_i[v]);
 }
 
 int main()
@@ -120,7 +115,7 @@ int main()
     input();
     process();
     dfs(1);
-    cout << solve() << endl;
+    cout << solve1(1) << endl;
     return 0;
 }
 

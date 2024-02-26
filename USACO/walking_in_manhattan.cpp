@@ -40,7 +40,7 @@ struct hash_pair {
 
 static constexpr int MAX_Q = 2e5+1, MAX_N = 2e5+1;
 int N, Q;
-int roads_h[MAX_N], roads_v[MAX_N];
+vector<int> roads[2];
 int cows[MAX_Q][3];
 
 void input()
@@ -53,9 +53,9 @@ void input()
         int loc;
         cin >> loc;
         if (dir == 'V')
-            roads_v[loc]++;
+            roads[0].push_back(loc);
         else
-            roads_h[loc]++;
+            roads[1].push_back(loc);
     }
     for(int i = 0; i < Q; ++i)
     {
@@ -65,6 +65,12 @@ void input()
         cows[i][1] = y;
         cows[i][2] = d;
     }
+}
+
+void proc()
+{
+    sort(roads[0].begin(), roads[0].end());
+    sort(roads[1].begin(), roads[1].end());
 }
 
 void print_cows()
@@ -78,29 +84,64 @@ void print_cows()
 void solve_cow(int i)
 {
     int walking = 0;
+    int& x = cows[i][0], &y = cows[i][1];
+    auto a = lower_bound(roads[0].begin(), roads[0].end(), x);
+    auto b = lower_bound(roads[1].begin(), roads[1].end(), y);
+    if(*a != x || *b != y)
+    {
+        if(*a == x)
+        {
+            int new_y = y + cows[i][2] - walking;
+            if(b != roads[1].end())
+                new_y = *b;
+
+            int dist = new_y - y;
+            dist = min(dist, cows[i][2] - walking);
+            walking += dist;
+            y += dist;
+        }
+        else if(*b == y)
+        {
+            int new_x = x + cows[i][2] - walking;
+            if(a != roads[0].end())
+                new_x = *a;
+
+            int dist = new_x - x;
+            dist = min(dist, cows[i][2] - walking);
+            walking += dist;
+            x += dist;  
+        }
+    }
+
     while(cows[i][2] > walking)
     {
-        int& x = cows[i][0], &y = cows[i][1];
-        if(roads_h[y] && roads_v[x])
+        if(walking % 2 == 0)
         {
-            if(walking%2)
-            {
-                ++x;
-            }
-            else
-            {
-                ++y;
-            }
-        }
-        else if(roads_h[y])
-        {
-            ++x;
+            ++b;
+
+            int new_y = y + cows[i][2] - walking;
+            if(b != roads[1].end())
+                new_y = *b;
+
+            int dist = new_y - y;
+            dist = min(dist, cows[i][2] - walking);
+            walking += dist;
+            y += dist;
         }
         else
         {
-            ++y;
+            ++a;
+
+            int new_x = x + cows[i][2] - walking;
+            if(a != roads[0].end())
+                new_x = *a;
+
+            int dist = new_x - x;
+            dist = min(dist, cows[i][2] - walking);
+            walking += dist;
+            x += dist;
         }
-        ++walking;
+
     }
 }
 
@@ -116,6 +157,7 @@ int main()
 {
     // Start here
     input();
+    proc();
     solve();
     print_cows();
     return 0;

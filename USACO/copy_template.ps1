@@ -7,7 +7,7 @@ if (-not $fileName) {
     exit
 }
 
-$templatePath = "./template.cpp"
+$templatePath = "./template.txt"
 $newFilePath = "./${fileName}.cpp"
 
 Copy-Item -Path $templatePath -Destination $newFilePath

@@ -38,114 +38,89 @@ struct hash_pair {
     }
 };
 
-void dfs(vector<vector<int>> & edges, vector<vector<int>> & res, vector<int> & occ, int i, int prev=-1)
-{
-    if(i!=0 && (edges[i].size() == 1 && edges[i][0] == prev))
-    {
-        res.push_back(occ);
-        return;
-    }
-    for(int & j : edges[i])
-    {
-        if(j == prev)
-            continue;
+static constexpr int MAXN = static_cast<int>(2e5);
 
-        occ[j] = 1;
-        dfs(edges, res, occ, j, i);
-        occ[j] = 0;
+int N;
+vector<int> adj[MAXN];
+int parent[MAXN];
+int potions[MAXN];
+int reachable[MAXN];
+
+void input()
+{
+    cin >> N;
+    for(int i = 0; i < N; ++i)
+    {
+        cin >> potions[i];
+    }
+    for(int i = 1; i < N; ++i)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
 }
 
-int hungarian(vector<vector<int>> & A, int n, int m) {
-    int INF = 1e6;
-    vector<int> u(n + 1, 0), v(m + 1, 0), p(m + 1, 0), way(m + 1, 0);
-    for (int i = 1; i <= n; ++i) {
-        p[0] = i;
-        int j0 = 0;
-        vector<int> minv(m + 1, INF);
-        vector<char> used(m + 1, false);
-        do {
-            used[j0] = true;
-            int i0 = p[j0], delta = -INF, j1; // Initialize delta to negative infinity for maximization
-            for (int j = 1; j <= m; ++j)
-                if (!used[j]) {
-                    int cur = A[i0 - 1][j - 1] - u[i0] - v[j]; // Adjust indices if needed
-                    if (cur > minv[j]) // Change comparison for maximization
-                        minv[j] = cur, way[j] = j0;
-                    if (minv[j] > delta) // Change comparison for maximization
-                        delta = minv[j], j1 = j;
-                }
-            for (int j = 0; j <= m; ++j)
-                if (used[j])
-                    u[p[j]] += delta, v[j] += delta; // Adjust addition for maximization
-                else
-                    minv[j] -= delta;
-            j0 = j1;
-        } while (p[j0] != 0);
-        do {
-            int j1 = way[j0];
-            p[j0] = p[j1];
-            j0 = j1;
-        } while (j0);
-    }
-    return v[0]; // This now represents the maximum value
-}
-
-
-int dfs_res(vector<vector<int>> & paths, vector<int> & potions, int m)
+void dfs(int v)
 {
-    int n = paths.size();
-    vector<int> upp(m,0);
-    for(int i = 0; i < potions.size(); ++i)
+    for(auto & u : adj[v])
     {
-        upp[potions[i]-1] = i;
-    }
-
-    for(int j = 0; j < m; ++j)
-    {
-        if(upp[j] >= n)
+        if(u != parent[v])
         {
-            for(int i = 0; i < n; ++i)
-            {
-                paths[i][j] = 0;
-            }
+            parent[u] = v;
+            dfs(u);
         }
     }
+}
 
-    paths.insert(paths.begin(), vector<int>(m, 0));
-    for(int i = 0; i <= n; ++i)
-        paths[i].insert(paths[i].begin(), 0);
+void process()
+{
+    int leaves = 0;
+    for(int i = 2; i <= N; ++i)
+    {
+        leaves += adj[i].size() == 1;
+    }
+    for(int i = 0; i < leaves; ++i)
+    {
+        reachable[potions[i]]++;
+    }
+}
 
-    return hungarian(paths, n, m);
+bool grab(int v)
+{
+    while(v>0)
+    {
+        if(reachable[v] > 0)
+        {
+            reachable[v]--;
+            return 1;
+        }
+        v = parent[v];
+    }
+    return 0;
+}
+
+int solve()
+{
+    int pots = 0;
+    for(int i = 2; i <= N; ++i)
+    {
+        if(adj[i].size() == 1)
+        {
+            pots += grab(i);
+        }
+    }
+    return pots;
 }
 
 int main()
 {
     // Start here
-    int N;
-    cin >> N;
-
-    vector<int> potions(N);
-    for(int i = 0; i < N; ++i)
-    {
-        cin >> potions[i];
-    }
-
-    vector<vector<int>> edges(N);
-    for(int i = 0; i < N-1; ++i)
-    {
-        int a, b;
-        cin >> a >> b;
-        edges[a-1].push_back(b-1);
-        edges[b-1].push_back(a-1);
-    }
-
-    vector<int> occ(N, 0);
-    vector<vector<int>> res;
-    occ[0] = 1;
-    dfs(edges, res, occ, 0);
-
-    cout << dfs_res(res, potions, N) << endl;
+    input();
+    process();
+    dfs(1);
+    cout << solve() << endl;
     return 0;
 }
 

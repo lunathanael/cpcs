@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "utility": "cpp"
+        "utility": "cpp",
+        "vector": "cpp",
+        "chrono": "cpp",
+        "ostream": "cpp",
+        "xhash": "cpp",
+        "unordered_set": "cpp",
+        "xutility": "cpp"
     }
 }

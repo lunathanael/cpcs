@@ -43,6 +43,9 @@ struct hash_pair {
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
     // Start here
 
     return 0;

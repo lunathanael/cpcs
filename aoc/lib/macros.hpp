@@ -97,7 +97,6 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define SZ(v) static_cast<int>(size(v))
 #define SORT(v) sort(ALL(v))
 #define REVERSE(v) reverse(ALL(v))
-#define TC(t) while (t--)
 #define FORTC(tc)                                                              \
   unsigned int t;                                                              \
   read_int<true>(t);                                                           \

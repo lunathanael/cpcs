@@ -4,8 +4,8 @@ DEBUG_FLAGS = -DTESTING -Wconversion -Werror -pedantic -g -g3 -DDEBUG -D_GLIBCXX
 RELEASE_FLAGS = -Ofast -DNDEBUG
 
 SRC = $(filter-out %_submit.cpp,$(wildcard *.cpp))
-NAME = $(basename $(SRC)).exe
-DEBUG_NAME = $(basename $(SRC))_debug.exe
+NAME = $(basename $(SRC)).out
+DEBUG_NAME = $(basename $(SRC))_debug.out
 
 .PHONY: all debug release submit clean new
 
@@ -19,7 +19,7 @@ endif
 all: release
 
 new: lib/utils/template.cpp
-	@copy "lib\utils\template.cpp" "main.cpp"
+	@cp "./lib/utils/template.cpp" "main.cpp"
 	@echo Created new source file: main.cpp
 
 debug: CXXFLAGS += $(DEBUG_FLAGS)
@@ -40,6 +40,6 @@ submit: $(SRC) lib/utils/submit.py
 	@echo Submission file created: $(SRC_SUBMIT)
 
 clean:
-	@rm -f *.exe *_submit.cpp
+	@rm -f *.out *_submit.cpp
 	@echo Cleaned up.
 

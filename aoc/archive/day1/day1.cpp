@@ -48,9 +48,11 @@ LL part_one() {
   VL v1;
   VL v2;
   LL i;
-  while (cin >> i) {
+  while (in >> i) {
     v1.pb(i);
+    DVALUE(i);
     in >> i;
+    DVALUE(i);
     v2.pb(i);
   }
 
@@ -84,9 +86,7 @@ LL part_two() {
 }
 
 int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(nullptr);
-  cout.tie(nullptr);
+  IOSOPT;
 
   // Start here
 

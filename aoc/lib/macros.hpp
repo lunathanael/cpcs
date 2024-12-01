@@ -8,6 +8,7 @@
 
 #include <array>
 #include <cmath>
+#include <iostream>
 #include <queue>
 #include <string>
 #include <unordered_map>
@@ -46,11 +47,14 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define DLOG(...) cout << __VA_ARGS__
 #define DVALUE(x) DLOG("The value of " << #x << " is " << x << endl)
 #define TEST_ONLY(code) code
+#define IOSOPT
 #else
 #define DMARK
 #define DLOG(...)
 #define DVALUE(x)
 #define TEST_ONLY(code)
+#define IOSOPT                                                                 \
+  ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
 #endif
 
 #define FOR(a, b, c)                                                           \

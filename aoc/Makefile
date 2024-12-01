@@ -40,6 +40,6 @@ submit: $(SRC) lib/utils/submit.py
 	@echo Submission file created: $(SRC_SUBMIT)
 
 clean:
-	@del /F /Q *.exe *_submit.cpp 2>nul
+	@rm -f *.exe *_submit.cpp
 	@echo Cleaned up.
 

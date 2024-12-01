@@ -8,6 +8,7 @@
 
 #include <array>
 #include <cmath>
+#include <ext/pb_ds/assoc_container.hpp>
 #include <iostream>
 #include <queue>
 #include <string>
@@ -18,8 +19,18 @@
 
 using namespace std;
 
+using I32 = int32_t;
+using U32 = uint32_t;
+using I64 = int64_t;
+using U64 = uint64_t;
+using F32 = float;
+using F64 = double;
+using I128 = __int128_t;
+using U128 = __uint128_t;
+
 using LL = long long;
 using ULL = unsigned long long;
+
 using PII = pair<int, int>;
 using PLL = pair<LL, LL>;
 using PSS = pair<string, string>;
@@ -30,7 +41,11 @@ using VL = vector<LL>;
 using VVL = vector<VL>;
 using VLL = vector<PLL>;
 
+/*
 template <typename K, typename V> using UMP = unordered_map<K, V>;
+template <typename K, typename V> using UMP = __gnu_pbds::gp_hash_table<K, V>;
+*/
+
 template <typename T> using UST = unordered_set<T>;
 template <typename T> using PQ = priority_queue<T>;
 template <typename T> using PQI = priority_queue<T, vector<T>, greater<T>>;

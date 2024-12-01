@@ -1,4 +1,5 @@
 #pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("popcnt")
 
 #include <algorithm>
 #include <bits/stdc++.h>
@@ -41,12 +42,14 @@ struct hash_pair {
 };
 
 LL part_one() {
+  auto in = read_file("input_1.txt");
+
   VL v1;
   VL v2;
   LL i;
   while (cin >> i) {
     v1.pb(i);
-    cin >> i;
+    in >> i;
     v2.pb(i);
   }
 
@@ -57,6 +60,12 @@ LL part_one() {
   FOR(i, 0, v1.size()) { ans += abs(v1[i] - v2[i]); }
 
   return ans;
+}
+
+LL part_two() {
+  auto in = read_file("input_2.txt");
+  VL v1;
+  VL v2;
 }
 
 int main() {

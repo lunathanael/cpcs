@@ -26,12 +26,6 @@ template <typename T> ostream &operator<<(ostream &os, vector<T> vec) {
   return os;
 }
 
-/**
- * Author: chilli
- * License: CC0
- * Description: Read an integer from stdin. Usage requires your program to pipe
- * in input from file. Time: About 5x as fast as cin/scanf.
- */
 inline ifstream read_file(const string &filename) {
   ifstream file(filename, ios::in);
   if (!file.is_open()) {
@@ -40,8 +34,14 @@ inline ifstream read_file(const string &filename) {
   return file;
 }
 
+/**
+ * Author: chilli
+ * License: CC0
+ * Description: Read an integer from stdin. Usage requires your program to pipe
+ * in input from file. Time: About 5x as fast as cin/scanf.
+ */
 inline char gc() { // like getchar()
-  static char buf[1 << 16];
+  static array<char, 1 << 16> buf;
   static size_t bc, be;
   if (bc >= be) {
     buf[0] = 0, bc = 0;
@@ -64,4 +64,7 @@ template <bool non_negative = false> int read_int() {
   return a - 48;
 }
 
+#define wez(n) int n = read_int();
+#define wez2(n, m) int n = read_int(), m = read_int();
+#define wez3(n, m, k) int n = read_int(), m = read_int(), k = read_int();
 #endif

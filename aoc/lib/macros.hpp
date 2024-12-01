@@ -69,8 +69,36 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define SORT(v) sort(ALL(v))
 #define REVERSE(v) reverse(ALL(v))
 #define TC(t) while (t--)
+#define FORTC()                                                                \
+  unsigned int t;                                                              \
+  read_int<true>(t);                                                           \
+  while (t--)
 
 #define HAS(v, x) (v.find(x) != v.end())
 #define AHAS(ds, x) (find(ALL(ds), x) != begin(ds))
+
+#define REMIN(a, b) a = min(a, b)
+#define REMAX(a, b) a = max(a, b)
+
+#define IN(i, l, r) (l < i && i < r) // the next for are for checking bounds
+#define LINR(i, l, r) (l <= i && i <= r)
+#define LIN(i, l, r) (l <= i && i < r)
+#define INR(i, l, r) (l < i && i <= r)
+
+#define bi_popcount(x) __builtin_popcount(x)
+#define bi_popcountl(x) __builtin_popcountl(x)
+#define bi_popcountll(x) __builtin_popcountll(x)
+#define bi_clz(x) __builtin_clz(x)
+#define bi_clzl(x) __builtin_clzl(x)
+#define bi_clzll(x) __builtin_clzll(x)
+#define bi_ctz(x) __builtin_ctz(x)
+#define bi_ctzl(x) __builtin_ctzl(x)
+#define bi_ctzll(x) __builtin_ctzll(x)
+#define bi_ffs(x) __builtin_ffs(x)
+#define bi_ffsl(x) __builtin_ffsl(x)
+#define bi_ffsll(x) __builtin_ffsll(x)
+#define bi_parity(x) __builtin_parity(x)
+#define bi_parityl(x) __builtin_parityl(x)
+#define bi_parityll(x) __builtin_parityll(x)
 
 #endif

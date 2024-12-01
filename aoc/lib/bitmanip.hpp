@@ -11,7 +11,6 @@
 #include <type_traits>
 #include <typeinfo>
 
-
 using namespace std;
 
 #define bit(x, i) (x & (1 << i))
@@ -40,47 +39,5 @@ using namespace std;
 #define clr_to(x) (x & (x + 1))
 // clears all trailing zeroes of x
 #define clr_tz(x) (~x & (x - 1))
-
-template <typename T> constexpr int popcount(T x) {
-  if constexpr (is_same_v<T, unsigned int> || is_same_v<T, int>) {
-    return __builtin_popcount(x);
-  } else if constexpr (is_same_v<T, unsigned long> || is_same_v<T, long>) {
-    return __builtin_popcountl(x);
-  } else if constexpr (is_same_v<T, unsigned long long> ||
-                       is_same_v<T, long long>) {
-    return __builtin_popcountll(x);
-  } else {
-    cerr << "popcount not implemented for type " << typeid(T).name() << endl;
-    exit(1);
-  }
-}
-
-template <typename T> constexpr int clz(T x) {
-  if constexpr (is_same_v<T, unsigned int> || is_same_v<T, int>) {
-    return __builtin_clz(x);
-  } else if constexpr (is_same_v<T, unsigned long> || is_same_v<T, long>) {
-    return __builtin_clzl(x);
-  } else if constexpr (is_same_v<T, unsigned long long> ||
-                       is_same_v<T, long long>) {
-    return __builtin_clzll(x);
-  } else {
-    cerr << "clz not implemented for type " << typeid(T).name() << endl;
-    exit(1);
-  }
-}
-
-template <typename T> constexpr int ctz(T x) {
-  if constexpr (is_same_v<T, unsigned int> || is_same_v<T, int>) {
-    return __builtin_ctz(x);
-  } else if constexpr (is_same_v<T, unsigned long> || is_same_v<T, long>) {
-    return __builtin_ctzl(x);
-  } else if constexpr (is_same_v<T, unsigned long long> ||
-                       is_same_v<T, long long>) {
-    return __builtin_ctzll(x);
-  } else {
-    cerr << "ctz not implemented for type " << typeid(T).name() << endl;
-    exit(1);
-  }
-}
 
 #endif

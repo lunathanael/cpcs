@@ -1,4 +1,5 @@
 #pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("popcnt")
 
 #include <algorithm>
 #include <bits/stdc++.h>

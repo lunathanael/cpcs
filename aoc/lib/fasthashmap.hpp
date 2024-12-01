@@ -17,6 +17,10 @@ using namespace std;
  * 3x faster. Uses 1.5x memory.
  * Initial capacity must be a power of 2 (if provided).
  */
+#ifndef FHM_RANDOMIZE
+#define FHM_RANDOMIZE false
+#endif
+
 #if !FHM_RANDOMIZE
 struct _FHM_chash {
   // To use most bits rather than just the lowest ones:

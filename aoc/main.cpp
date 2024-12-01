@@ -73,6 +73,9 @@ int main() {
       DVALUE(j);
     }
   } DMARK;)
+
+  cout << popcount(1023) << endl;
+
   // Start here
 
   // cout << part_one() << endl;

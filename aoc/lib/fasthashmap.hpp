@@ -1,11 +1,3 @@
-/**
- * Author: Simon Lindholm, chilli
- * License: CC0
- * Source: http://codeforces.com/blog/entry/60737
- * Description: Hash map with mostly the same API as unordered\_map, but \tilde
- * 3x faster. Uses 1.5x memory.
- * Initial capacity must be a power of 2 (if provided).
- */
 #ifndef FAST_HASH_MAP
 #define FAST_HASH_MAP
 
@@ -17,6 +9,14 @@
 
 using namespace std;
 
+/**
+ * Author: Simon Lindholm, chilli
+ * License: CC0
+ * Source: http://codeforces.com/blog/entry/60737
+ * Description: Hash map with mostly the same API as unordered\_map, but \tilde
+ * 3x faster. Uses 1.5x memory.
+ * Initial capacity must be a power of 2 (if provided).
+ */
 #if !FHM_RANDOMIZE
 struct _FHM_chash {
   // To use most bits rather than just the lowest ones:

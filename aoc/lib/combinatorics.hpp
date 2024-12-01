@@ -1,11 +1,3 @@
-/**
- * Author: Mattias de Zalenski, Fredrik Niemelä, Per Austrin, Simon Lindholm
- * Date: 2002-09-26
- * Source: Max Bennedich
- * Description: Computes binomal
- * (k_1 + ... + k_n)(k_1, k_2, ..., k_n)
- * = (k_1 + ... + k_n)! / (k_1!k_2!...k_n!)
- * */
 #ifndef COMBINATORICS_HPP
 #define COMBINATORICS_HPP
 
@@ -35,6 +27,14 @@ static const constexpr array<double, 151> _FACTORIALS_ARR_DOUBLE = []() {
 #define factorial(n) _FACTORIALS_ARR[n]
 #define factoriald(n) _FACTORIALS_ARR_DOUBLE[n]
 
+/**
+ * Author: Mattias de Zalenski, Fredrik Niemelä, Per Austrin, Simon Lindholm
+ * Date: 2002-09-26
+ * Source: Max Bennedich
+ * Description: Computes binomal
+ * (k_1 + ... + k_n)(k_1, k_2, ..., k_n)
+ * = (k_1 + ... + k_n)! / (k_1!k_2!...k_n!)
+ * */
 // Calculating multinomial coefficients
 // Represents the number of ways to assign sum(v) objects to size(v) groups
 uint64_t multinomial(vector<int> &v) {

@@ -7,15 +7,20 @@ SRC = $(filter-out %_submit.cpp,$(wildcard *.cpp))
 NAME = $(basename $(SRC)).exe
 DEBUG_NAME = $(basename $(SRC))_debug.exe
 
-# Check for multiple source files
-ifneq ($(words $(SRC)),1)
-    $(warning "Warning: Multiple .cpp files found (excluding submission*.cpp). Please ensure only one main source file exists.")
-    $(error "Build stopped")
+.PHONY: all debug release submit clean new
+
+ifneq ($(MAKECMDGOALS),new)
+    ifneq ($(words $(SRC)),1)
+        $(warning "Warning: Multiple (or None) .cpp files found (excluding submission*.cpp). Please ensure only one main source file exists.")
+        $(error "Build stopped")
+    endif
 endif
 
-.PHONY: all debug release submit clean
-
 all: release
+
+new: lib/utils/template.cpp
+	@copy "lib\utils\template.cpp" "main.cpp"
+	@echo Created new source file: main.cpp
 
 debug: CXXFLAGS += $(DEBUG_FLAGS)
 debug: $(DEBUG_NAME)

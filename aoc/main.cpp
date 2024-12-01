@@ -1,5 +1,4 @@
 #pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
 #include <bits/stdc++.h>
 #include <iostream>
@@ -48,6 +47,27 @@ int main()
     cout.tie(nullptr);
     // Start here
 
+    vector<int> v1, v2;
+    // vl v1;
+    // vl v2;
+    // LL i;
+    // while(cin >> i)
+    // {
+    //     v1.pb(i);
+    //     cin >> i;
+    //     v2.pb(i);
+    // }
+
+    // SORT(v1);
+    // SORT(v2);
+    
+    // LL ans = 0;
+    // FOR(i, 0, v1.size())
+    // {
+    //     ans += abs(v1[i] - v2[i]);
+    // }
+
+    // cout << ans << endl;
     return 0;
 }
 

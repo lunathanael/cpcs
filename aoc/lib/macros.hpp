@@ -50,12 +50,9 @@ static constexpr const array<int, 8> diry = { 0, 1, -1, 0, -1, 1, -1, 1 };
 #define mp make_pair
 #define pb push_back
 #define ALL(v) begin(v), end(v)
-#define ALLA(arr, sz) arr, arr + sz
 #define SIZE(v) static_cast<int>(size(v))
 #define SORT(v) sort(ALL(v))
 #define REVERSE(v) reverse(ALL(v))
-#define SORTA(arr, sz) sort(ALLA(arr, sz))
-#define REVERSEA(arr, sz) reverse(ALLA(arr, sz))
 #define PERMUTE next_permutation
 #define TC(t) while (t--)
 

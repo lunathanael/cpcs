@@ -1,5 +1,6 @@
-#pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("popcnt")
+// change to O3 to disable fast-math for geometry problems
+#pragma GCC optimize("Ofast,unroll-loops")
+#pragma GCC target("avx2,popcnt,lzcnt,abm,bmi,bmi2,fma,tune=native")
 
 #include <algorithm>
 #include <bits/stdc++.h>
@@ -42,7 +43,7 @@ struct hash_pair {
 };
 
 LL part_one() {
-  auto in = read_file("input_1.txt");
+  auto in = read_file("in.txt");
 
   VL v1;
   VL v2;
@@ -63,9 +64,23 @@ LL part_one() {
 }
 
 LL part_two() {
-  auto in = read_file("input_2.txt");
+  auto in = read_file("in.txt");
   VL v1;
   VL v2;
+  LL i;
+  while (in >> i) {
+    v1.pb(i);
+    in >> i;
+    v2.pb(i);
+  }
+
+  UMP<LL, LL> mp;
+  FORE(ele, v2) { mp[ele]++; }
+
+  LL ans = 0;
+  FORE(ele, v1) { ans += ele * mp[ele]; }
+
+  return ans;
 }
 
 int main() {
@@ -73,20 +88,9 @@ int main() {
   cin.tie(nullptr);
   cout.tie(nullptr);
 
-  TEST_ONLY(DMARK; for (int i = 0; i < 64; ++i) {
-    LL j = 1LL << i;
-
-    if (!is_pow2(j)) {
-      DMARK;
-      DVALUE(i);
-      DVALUE(j);
-    }
-  } DMARK;)
-
-  cout << popcount(1023) << endl;
-
   // Start here
 
-  // cout << part_one() << endl;
+  cout << part_one() << endl;
+  cout << part_two() << endl;
   return 0;
 }

@@ -41,7 +41,7 @@ inline ifstream read_file(const string &filename) {
  * in input from file. Time: About 5x as fast as cin/scanf.
  */
 inline char gc() { // like getchar()
-  static array<char, 1 << 16> buf;
+  static char buf[1 << 16];
   static size_t bc, be;
   if (bc >= be) {
     buf[0] = 0, bc = 0;

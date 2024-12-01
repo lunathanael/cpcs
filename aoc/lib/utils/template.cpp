@@ -21,6 +21,8 @@
 #include <utility>
 #include <vector>
 
+#define FHM_RANDOMIZE false
+
 /* START OPTIONAL INCLUDES */
 #include "lib/bitmanip.hpp"
 #include "lib/io.hpp"

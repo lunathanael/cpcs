@@ -22,11 +22,13 @@
 #include <utility>
 #include <vector>
 
+#define FHM_RANDOMIZE false
+
 /* START OPTIONAL INCLUDES */
 #include "lib/bitmanip.hpp"
+#include "lib/fasthashmap.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
-
 /* END OPTIONAL INCLUDES */
 
 using namespace std;

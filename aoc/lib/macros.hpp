@@ -58,7 +58,7 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 
 #ifdef TESTING
 [[maybe_unused]] static int _GLOBAL_PRINT_COUNT = 0;
-#define DMARK cout << "====TESTING==== " << ++_GLOBAL_PRINT_COUNT << "\n"
+#define DMARK cout << "====TESTING==== " << ++_GLOBAL_PRINT_COUNT << endl;
 #define DLOG(...) cout << __VA_ARGS__
 #define DVALUE(x) DLOG("The value of " << #x << " is " << x << endl)
 #define TEST_ONLY(code) code

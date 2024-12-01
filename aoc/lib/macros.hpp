@@ -98,7 +98,7 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define SORT(v) sort(ALL(v))
 #define REVERSE(v) reverse(ALL(v))
 #define TC(t) while (t--)
-#define FORTC()                                                                \
+#define FORTC(tc)                                                              \
   unsigned int t;                                                              \
   read_int<true>(t);                                                           \
   while (t--)

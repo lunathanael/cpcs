@@ -50,6 +50,19 @@ inline char gc() { // like getchar()
   return buf[bc++]; // returns 0 on EOF
 }
 
+template <typename T_container, typename T = typename enable_if<
+                                    !is_same<T_container, string>::value,
+                                    typename T_container::value_type>::type>
+ostream &operator<<(ostream &os, const T_container &v) {
+  os << '{';
+  string sep;
+  for (const T &x : v) {
+    os << sep << x;
+    sep = ", ";
+  };
+  return os << '}';
+}
+
 template <bool non_negative = false> int read_int() {
   int a, c;
   while ((a = static_cast<int>(gc())) < 40)

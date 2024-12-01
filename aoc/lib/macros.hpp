@@ -1,11 +1,7 @@
 /**
- * Author: Lukas Polacek
- * Date: 2009-10-30
- * License: CC0
- * Source: folklore/TopCoder
- * Description: Computes partial sums a[0] + a[1] + ... + a[pos - 1], and
- * updates single elements a[i], taking the difference between the old and new
- * value. Time: Both operations are $O(\log N)$. Status: Stress-tested
+ * Author: Nathanael Lu
+ * Source: folklore
+ * Description: Common macros taken from various sources with personal tweaks
  */
 #ifndef MACROS_HPP
 #define MACROS_HPP
@@ -13,6 +9,7 @@
 #include <array>
 #include <cmath>
 #include <string>
+#include <utility>
 #include <vector>
 
 using namespace std;
@@ -39,26 +36,28 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 
 #ifdef TESTING
 [[maybe_unused]] static int _GLOBAL_PRINT_COUNT = 0;
-#define PRINT_MARK cout << "====TESTING==== " << ++_GLOBAL_PRINT_COUNT << "\n"
-#define VALUE(x) cout << "The value of " << #x << " is " << x << endl
-#define debug(...) cout << __VA_ARGS__
+#define DMARK cout << "====TESTING==== " << ++_GLOBAL_PRINT_COUNT << "\n"
+#define DLOG(...) cout << __VA_ARGS__
+#define DVALUE(x) DLOG("The value of " << #x << " is " << x << endl)
+#define TEST_ONLY(code) code
 #else
-#define PRINT_MARK
-#define VALUE(x)
-#define debug(...)
+#define DMARK
+#define DLOG(...)
+#define DVALUE(x)
+#define TEST_ONLY(code)
 #endif
 
 #define FOR(a, b, c)                                                           \
-  for (int(a) = static_cast<int>(b); (a) < static_cast<int>(c); ++(a))
+  for (int a = static_cast<int>(b); a < static_cast<int>(c); ++a)
 #define FORN(a, b, c)                                                          \
-  for (int(a) = static_cast<int>(b); (a) <= static_cast<int>(c); ++(a))
+  for (int a = static_cast<int>(b); a <= static_cast<int>(c); ++a)
 #define FORR(a, b, c)                                                          \
-  for (int(a) = static_cast<int>(b); (a) >= static_cast<int>(c); --(a))
+  for (int a = static_cast<int>(b); a >= static_cast<int>(c); --a)
 #define FORSQ(a, b, c)                                                         \
-  for (int(a) = static_cast<int>(b); (a) * (a) <= static_cast<int>(c); ++(a))
+  for (int a = static_cast<int>(b); a * a <= static_cast<int>(c); ++a)
 #define FORC(a, b, c)                                                          \
-  for (char(a) = static_cast<char>(b); (a) <= static_cast<char>(c); ++(a))
-#define FORE(a, b) for (auto &(a) : (b))
+  for (char a = static_cast<char>(b); a <= static_cast<char>(c); ++a)
+#define FORE(a, b) for (auto &a : b)
 #define REP(i, n) FOR(i, 0, n)
 #define REPN(i, n) FORN(i, 1, n)
 #define REPR(i, n) FORR(i, n, 0)
@@ -75,6 +74,6 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define SORT(v) sort(ALL(v))
 #define REVERSE(v) reverse(ALL(v))
 #define PERMUTE next_permutation
-#define TC(t) while ((t)--)
+#define TC(t) while (t--)
 
 #endif

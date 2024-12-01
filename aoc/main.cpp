@@ -17,11 +17,14 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 /* START OPTIONAL INCLUDES */
+#include "lib/bitmanip.hpp"
+#include "lib/io.hpp"
 #include "lib/macros.hpp"
-#include "lib/utils/io.h"
+
 /* END OPTIONAL INCLUDES */
 
 using namespace std;
@@ -60,8 +63,18 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   cout.tie(nullptr);
+
+  TEST_ONLY(DMARK; for (int i = 0; i < 64; ++i) {
+    LL j = 1LL << i;
+
+    if (!is_pow2(j)) {
+      DMARK;
+      DVALUE(i);
+      DVALUE(j);
+    }
+  } DMARK;)
   // Start here
 
-  cout << part_one() << endl;
+  // cout << part_one() << endl;
   return 0;
 }

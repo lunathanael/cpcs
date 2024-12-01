@@ -1,5 +1,6 @@
 /**
  * Author: Nathanael Lu
+ * Source: Own work
  * Description: Common IO utilities
  */
 #ifndef IO_H
@@ -40,7 +41,7 @@ inline ifstream read_file(const string &filename) {
 }
 
 inline char gc() { // like getchar()
-  static std::array<char, 1 << 16> buf;
+  static char buf[1 << 16];
   static size_t bc, be;
   if (bc >= be) {
     buf[0] = 0, bc = 0;
@@ -49,16 +50,17 @@ inline char gc() { // like getchar()
   return buf[bc++]; // returns 0 on EOF
 }
 
-int readInt() {
+template <bool non_negative = false> int read_int() {
   int a, c;
-  while ((a = gc()) < 40)
+  while ((a = static_cast<int>(gc())) < 40)
     ;
-  if (a == '-') {
-    return -readInt();
+  if constexpr (!non_negative) {
+    if (a == '-') {
+      return -read_int<true>();
+    }
   }
-  while ((c = gc()) >= 48) {
-    a = (a * 10) + (c - 480);
-  }
+  while ((c = static_cast<int>(gc())) >= 48)
+    a = a * 10 + c - 480;
   return a - 48;
 }
 

@@ -23,6 +23,8 @@ CompileFlags:
     - -fdelayed-template-parsing
 
 Diagnostics:
+  UnusedIncludes: None
+  MissingIncludes: Strict
   ClangTidy:
     Add: 
       - modernize*
@@ -32,6 +34,7 @@ Diagnostics:
     Remove:
       - modernize-use-trailing-return-type
       - readability-identifier-length
+      - bugprone-macro-parentheses
 
 Index:
   Background: Build

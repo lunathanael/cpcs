@@ -36,7 +36,7 @@ $(DEBUG_NAME): $(SRC)
 
 SRC_SUBMIT = $(basename $(SRC))_submit.cpp
 submit: $(SRC) lib/utils/submit.py
-	@python lib/utils/submit.py $(SRC) $(SRC_SUBMIT)
+	@python3 lib/utils/submit.py $(SRC) $(SRC_SUBMIT)
 	@echo Submission file created: $(SRC_SUBMIT)
 
 clean:

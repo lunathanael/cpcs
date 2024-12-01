@@ -24,8 +24,19 @@ static const constexpr array<uint64_t, 21> _FACTORIALS_ARR = []() {
   return factorials;
 }();
 
-#define factorial(n) _FACTORIALS_ARR[n]
+static const constexpr array<double, 151> _FACTORIALS_ARR_DOUBLE = []() {
+  array<double, 151> factorials = {1, 1};
+  for (unsigned int i = 2; i <= 150; ++i) {
+    factorials[i] = factorials[i - 1] * i;
+  };
+  return factorials;
+}();
 
+#define factorial(n) _FACTORIALS_ARR[n]
+#define factoriald(n) _FACTORIALS_ARR_DOUBLE[n]
+
+// Calculating multinomial coefficients
+// Represents the number of ways to assign sum(v) objects to size(v) groups
 uint64_t multinomial(vector<int> &v) {
   uint64_t c = 1, m = v.empty() ? 1 : v[0];
   for (int i = 1; i < static_cast<int>(v.size()); ++i) {

@@ -47,8 +47,5 @@ int main() {
   IOSOPT;
   // Start here
 
-  vector<int> v = {1, 2, 3};
-  cout << multinomial(v) << endl;
-
   return 0;
 }

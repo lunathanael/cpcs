@@ -25,8 +25,7 @@
 
 /* START OPTIONAL INCLUDES */
 #include "lib/bitmanip.hpp"
-#include "lib/factorial.hpp"
-#include "lib/intperm.hpp"
+#include "lib/combinatorics.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
 /* END OPTIONAL INCLUDES */
@@ -47,6 +46,9 @@ struct hash_pair {
 int main() {
   IOSOPT;
   // Start here
+
+  vector<int> v = {1, 2, 3};
+  cout << multinomial(v) << endl;
 
   return 0;
 }

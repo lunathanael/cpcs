@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
-DEBUG_FLAGS = -DTESTING -Wconversion -Werror -pedantic -g -g3 -DDEBUG -D_GLIBCXX_DEBUG
+DEBUG_FLAGS = -DTESTING -Wconversion -Werror -pedantic -g -g3 -DDEBUG -D_GLIBCXX_DEBUG -fsanitize=address,undefined
 RELEASE_FLAGS = -Ofast -DNDEBUG
 
 SRC = $(filter-out %_submit.cpp,$(wildcard *.cpp))

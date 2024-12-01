@@ -25,6 +25,7 @@
 
 /* START OPTIONAL INCLUDES */
 #include "lib/bitmanip.hpp"
+#include "lib/intperm.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
 /* END OPTIONAL INCLUDES */

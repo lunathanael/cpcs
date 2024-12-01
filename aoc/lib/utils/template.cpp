@@ -21,9 +21,9 @@
 #include <vector>
 
 /* START OPTIONAL INCLUDES */
+#include "lib/bitmanip.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
-
 /* END OPTIONAL INCLUDES */
 
 using namespace std;

@@ -28,6 +28,7 @@
 #include "lib/combinatorics.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
+#include "lib/segment_tree.hpp"
 /* END OPTIONAL INCLUDES */
 
 using namespace std;

@@ -94,6 +94,7 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define pb push_back
 
 #define ALL(v) begin(v), end(v)
+#define ALLR(v) rbegin(v), rend(v)
 #define SZ(v) static_cast<int>(size(v))
 #define SORT(v) sort(ALL(v))
 #define REVERSE(v) reverse(ALL(v))
@@ -108,10 +109,14 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define REMIN(a, b) a = min(a, b)
 #define REMAX(a, b) a = max(a, b)
 
-#define IN(i, l, r) (l < i && i < r) // the next for are for checking bounds
-#define LINR(i, l, r) (l <= i && i <= r)
-#define LIN(i, l, r) (l <= i && i < r)
-#define INR(i, l, r) (l < i && i <= r)
+#define IN(i, l, r)                                                            \
+  ((l) < (i) && (i) < (r)) // the next for are for checking bounds
+#define LINR(i, l, r) ((l) <= (i) && (i) <= (r))
+#define LIN(i, l, r) ((l) <= (i) && (i) < (r))
+#define INR(i, l, r) ((l) < (i) && (i) <= (r))
+
+#define BINOP(...) [](auto a, auto b) { return __VA_ARGS__; }
+#define SCAST(type, x) static_cast<type>(x)
 
 #define bi_popcount(x) __builtin_popcount(x)
 #define bi_popcountl(x) __builtin_popcountl(x)

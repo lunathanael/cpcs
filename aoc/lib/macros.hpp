@@ -115,7 +115,11 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define LIN(i, l, r) ((l) <= (i) && (i) < (r))
 #define INR(i, l, r) ((l) < (i) && (i) <= (r))
 
-#define BINOP(...) [](auto a, auto b) { return __VA_ARGS__; }
+#define BINOP(name, ...)                                                       \
+  template <typename T = int> struct name {                                    \
+    constexpr T operator()(const T a, const T b) const { return __VA_ARGS__; } \
+  }
+#define BINOPR(...) [](const auto &a, const auto &b) { return __VA_ARGS__; }
 #define SCAST(type, x) static_cast<type>(x)
 
 #define bi_popcount(x) __builtin_popcount(x)

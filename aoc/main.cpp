@@ -47,6 +47,7 @@ struct hash_pair {
 // Create a segment tree that performs addition
 BINOP(add, a + b);
 
+
 int main() {
   IOSOPT;
 

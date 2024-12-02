@@ -54,7 +54,7 @@ template <typename F, typename T = int> struct SegTree {
  * License: CC0
  * Description: Segment tree to add or set values of large intervals.
  * Use bump allocator for perf, and SmallPtr or implicit indices for memory.
- * Time: O(\log N).
+ * Time: O(log N).
  * Usage: Node* tr = new Node(v, 0, sz(v));
  */
 // #include "../various/BumpAllocator.h"

@@ -22,6 +22,11 @@ template <typename F, typename T = int, T unit = T{}> struct SegTree {
   int n;
   SegTree(const int n) : s(2 * n, unit), n(n) {}
 
+  template <typename It>
+  SegTree(const vector<T> &v) : s(2 * v.size(), unit), n(v.size()) {
+    init(begin(v), end(v));
+  }
+
   template <typename It> void init(It first, It last) {
     copy(first, last, begin(s) + n);
     for (int i = n - 1; i > 0; --i) {
@@ -70,7 +75,7 @@ template <typename F, typename T = int, T unit = T{}> struct _LAZYSEGTREENODE {
     delete r;
   }
 
-  _LAZYSEGTREENODE(vector<T> &v, int lo, int hi) : lo(lo), hi(hi) {
+  _LAZYSEGTREENODE(const vector<T> &v, int lo, int hi) : lo(lo), hi(hi) {
     if (lo + 1 < hi) {
       int mid = lo + (hi - lo) / 2;
       l = new _LAZYSEGTREENODE(v, lo, mid);
@@ -132,7 +137,7 @@ template <typename F, typename T = int, T unit = T{}> struct LazySegTree {
   _LAZYSEGTREENODE<F, T, unit> *root;
   LazySegTree(const int lo, const int hi)
       : root(new _LAZYSEGTREENODE<F, T, unit>(lo, hi)) {}
-  LazySegTree(vector<T> &v)
+  LazySegTree(const vector<T> &v)
       : root(new _LAZYSEGTREENODE<F, T, unit>(v, 0, v.size())) {}
   ~LazySegTree() { delete root; }
   T query(int L, int R) { return root->query(L, R); }

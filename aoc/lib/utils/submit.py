@@ -46,7 +46,7 @@ def process_file(input_file, output_file):
     # Replace the optional section with resolved includes
     new_content = re.sub(
         r'/\* START OPTIONAL INCLUDES \*/.*?/\* END OPTIONAL INCLUDES \*/',
-        lambda m: resolved_includes.replace('\\', '\\\\'),  # Double backslashes instead of full escape
+        lambda m: resolved_includes,  # Use a lambda to avoid regex interpretation
         content,
         flags=re.DOTALL
     )

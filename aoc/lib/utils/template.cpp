@@ -29,6 +29,7 @@
 #include "lib/combinatorics.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
+#include "lib/numbers.hpp"
 #include "lib/segment_tree.hpp"
 /* END OPTIONAL INCLUDES */
 

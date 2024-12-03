@@ -13,6 +13,7 @@
 #include <map>
 #include <numeric>
 #include <queue>
+#include <regex>
 #include <set>
 #include <sstream>
 #include <string>

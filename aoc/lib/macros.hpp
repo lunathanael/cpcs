@@ -40,6 +40,8 @@ using VII = vector<PII>;
 using VL = vector<LL>;
 using VVL = vector<VL>;
 using VLL = vector<PLL>;
+using VS = vector<string>;
+using STR = string;
 
 /*
 template <typename K, typename V> using UMP = unordered_map<K, V>;
@@ -82,7 +84,7 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
   for (int a = static_cast<int>(b); a * a <= static_cast<int>(c); ++a)
 #define FORC(a, b, c)                                                          \
   for (char a = static_cast<char>(b); a <= static_cast<char>(c); ++a)
-#define FORE(ele, ds) for (auto &ele : ds)
+#define FORE(ele, ds) for (auto ele : ds)
 #define REP(i, n) FOR(i, 0, n)
 #define REPN(i, n) FORN(i, 1, n)
 #define REPR(i, n) FORR(i, n, 0)

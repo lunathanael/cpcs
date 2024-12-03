@@ -44,17 +44,60 @@ struct hash_pair {
   }
 };
 
-void process() { auto in = read_file("in.txt"); }
+VS vs;
+void process() {
+  auto in = read_file("in.txt");
+  STR s;
+  while (getline(in, s)) {
+    vs.pb(s);
+  }
+}
 
-void part1() {}
+void part1() {
+  int sum = 0;
+  regex pattern(R"(mul\((\d+),(\d+)\))");
+  smatch match;
+  FORE(s, vs) {
+    while (regex_search(s, match, pattern)) {
+      int a = stoi(match[1]);
+      int b = stoi(match[2]);
+      sum += a * b;
+      s = match.suffix();
+    }
+  }
+  cout << sum << endl;
+}
 
-void part2() {}
+void part2() {
+  int sum = 0;
+  bool summing = true;
+  regex pattern(R"(mul\((\d+),(\d+)\)|do\(\)|don't\(\))");
+  smatch match;
+  FORE(s, vs) {
+    while (regex_search(s, match, pattern)) {
+      string op = match[0];
+      // cout << op << endl;
+      if (op == "do()") {
+        summing = true;
+      } else if (op == "don't()") {
+        summing = false;
+      } else {
+        int a = stoi(match[1]);
+        int b = stoi(match[2]);
+        if (summing) {
+          sum += a * b;
+        }
+      }
+      s = match.suffix();
+    }
+  }
+  cout << sum << endl;
+}
 
 int main() {
   IOSOPT;
   // Start here
   process();
-
   part1();
   part2();
 

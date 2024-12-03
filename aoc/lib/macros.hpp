@@ -53,16 +53,16 @@ template <typename T> using PQ = priority_queue<T>;
 template <typename T> using PQI = priority_queue<T, vector<T>, greater<T>>;
 
 static const double PI = acos(-1);
-static constexpr const array<array<int, 2>, 4> dirx = {
+static constexpr const array<array<int, 2>, 4> DIRXY = {
     {{0, 1}, {0, -1}, {1, 0}, {-1, 0}}};
-static constexpr const array<array<int, 2>, 8> dirxx = {
+static constexpr const array<array<int, 2>, 8> DIRDIAG = {
     {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}}};
 
 #ifdef TESTING
 [[maybe_unused]] static int _GLOBAL_PRINT_COUNT = 0;
 #define DMARK cout << "====TESTING==== " << ++_GLOBAL_PRINT_COUNT << endl;
-#define DLOG(...) cout << __VA_ARGS__
-#define DVALUE(x) DLOG("The value of " << #x << " is " << x << endl)
+#define DLOG(...) cout << __VA_ARGS__;
+#define DVALUE(x) DLOG("The value of " << #x << " is " << x << endl);
 #define TEST_ONLY(code) code
 #define IOSOPT
 #else
@@ -71,7 +71,7 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define DVALUE(x)
 #define TEST_ONLY(code)
 #define IOSOPT                                                                 \
-  ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
+  ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 #endif
 
 #define FOR(a, b, c)                                                           \
@@ -88,7 +88,7 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define REP(i, n) FOR(i, 0, n)
 #define REPN(i, n) FORN(i, 1, n)
 #define REPR(i, n) FORR(i, n, 0)
-#define RESET(a, b) memset(a, b, sizeof(a))
+#define RESET(a, b) memset(a, b, sizeof(a));
 
 #define fi first
 #define se second
@@ -98,8 +98,8 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define ALL(v) begin(v), end(v)
 #define ALLR(v) rbegin(v), rend(v)
 #define SZ(v) static_cast<int>(size(v))
-#define SORT(v) sort(ALL(v))
-#define REVERSE(v) reverse(ALL(v))
+#define SORT(v) sort(ALL(v));
+#define REVERSE(v) reverse(ALL(v));
 #define FORTC(tc)                                                              \
   unsigned int t;                                                              \
   read_int<true>(t);                                                           \
@@ -108,8 +108,8 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define HAS(v, x) (v.find(x) != v.end())
 #define AHAS(ds, x) (find(ALL(ds), x) != begin(ds))
 
-#define REMIN(a, b) a = min(a, b)
-#define REMAX(a, b) a = max(a, b)
+#define REMIN(a, b) a = min(a, b);
+#define REMAX(a, b) a = max(a, b);
 
 #define IN(i, l, r)                                                            \
   ((l) < (i) && (i) < (r)) // the next for are for checking bounds
@@ -118,10 +118,19 @@ static constexpr const array<array<int, 2>, 8> dirxx = {
 #define INR(i, l, r) ((l) < (i) && (i) <= (r))
 
 #define BINOP(name, ...)                                                       \
-  template <typename T = int> struct name {                                    \
-    constexpr T operator()(const T a, const T b) const { return __VA_ARGS__; } \
-  }
-#define BINOPR(...) [](const auto &a, const auto &b) { return __VA_ARGS__; }
+  template <typename T = void> struct name;                                    \
+  template <typename T> struct name {                                          \
+    constexpr T operator()(const T &x, const T &y) const {                     \
+      return __VA_ARGS__;                                                      \
+    }                                                                          \
+  };                                                                           \
+  template <> struct name<void> {                                              \
+    template <typename T>                                                      \
+    constexpr T operator()(const T &x, const T &y) const {                     \
+      return __VA_ARGS__;                                                      \
+    }                                                                          \
+  };
+
 #define SCAST(type, x) static_cast<type>(x)
 
 #define bi_popcount(x) __builtin_popcount(x)

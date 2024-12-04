@@ -25,6 +25,7 @@
 #define FHM_RANDOMIZE false
 
 /* START OPTIONAL INCLUDES */
+#include "lib/aoc.hpp"
 #include "lib/bitmanip.hpp"
 #include "lib/combinatorics.hpp"
 #include "lib/io.hpp"

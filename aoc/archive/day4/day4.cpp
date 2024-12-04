@@ -25,7 +25,6 @@
 #define FHM_RANDOMIZE false
 
 /* START OPTIONAL INCLUDES */
-#include "lib/aoc.hpp"
 #include "lib/bitmanip.hpp"
 #include "lib/combinatorics.hpp"
 #include "lib/io.hpp"
@@ -47,7 +46,15 @@ struct hash_pair {
   }
 };
 
-VS vs = read_aoc("in.txt");
+VS vs;
+
+void process() {
+  auto in = read_file("in.txt");
+  string s;
+  while (in >> s) {
+    vs.pb(s);
+  }
+}
 
 void part1() {
   int n = SZ(vs), m = n ? SZ(vs[0]) : 0;
@@ -129,6 +136,7 @@ void part2() {
 
 int main() {
   IOSOPT;
+  process();
   part1();
   part2();
 

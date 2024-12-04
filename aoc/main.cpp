@@ -46,9 +46,99 @@ struct hash_pair {
   }
 };
 
+VS vs;
+
+void process() {
+  auto in = read_file("in.txt");
+  string s;
+  while (in >> s) {
+    vs.pb(s);
+  }
+}
+
+void part1() {
+  int n = SZ(vs), m = n ? SZ(vs[0]) : 0;
+  if (!n)
+    return;
+
+  string target = "XMAS";
+  int ans = 0;
+  auto check = [&](string s) { ans += (s == target); };
+
+  REP(i, n) REP(j, m - 3) {
+    string s1, s2;
+    REP(k, 4) {
+      s1 += vs[i][j + k];
+      s2 = vs[i][j + k] + s2;
+    }
+    check(s1);
+    check(s2);
+  }
+
+  REP(i, n - 3) REP(j, m) {
+    string s1, s2;
+    REP(k, 4) {
+      s1 += vs[i + k][j];
+      s2 = vs[i + k][j] + s2;
+    }
+    check(s1);
+    check(s2);
+  }
+
+  REP(i, n - 3) {
+    REP(j, m - 3) {
+      string s1, s2;
+      REP(k, 4) {
+        s1 += vs[i + k][j + k];
+        s2 = vs[i + k][j + k] + s2;
+      }
+      check(s1);
+      check(s2);
+    }
+    FOR(j, 3, m) {
+      string s1, s2;
+      REP(k, 4) {
+        s1 += vs[i + k][j - k];
+        s2 = vs[i + k][j - k] + s2;
+      }
+      check(s1);
+      check(s2);
+    }
+  }
+
+  cout << ans << endl;
+}
+
+void part2() {
+  int ans = 0;
+  string target = "MAS";
+
+  int n = SZ(vs);
+  int m = SZ(vs[0]);
+
+  FOR(i, 1, n - 1) {
+    FOR(j, 1, m - 1) {
+      if (vs[i][j] == 'A') {
+        bool tl = (vs[i - 1][j - 1] == 'M' && vs[i + 1][j + 1] == 'S') ||
+                  (vs[i - 1][j - 1] == 'S' && vs[i + 1][j + 1] == 'M');
+        bool tr = (vs[i - 1][j + 1] == 'M' && vs[i + 1][j - 1] == 'S') ||
+                  (vs[i - 1][j + 1] == 'S' && vs[i + 1][j - 1] == 'M');
+
+        if (tl && tr) {
+          ans++;
+        }
+      }
+    }
+  }
+
+  cout << ans << endl;
+}
+
 int main() {
   IOSOPT;
-  // Start here
+  process();
+  part1();
+  part2();
 
   return 0;
 }

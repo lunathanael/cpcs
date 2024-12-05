@@ -108,7 +108,7 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
   while (tc--)
 
 #define HAS(v, x) (v.find(x) != v.end())
-#define AHAS(ds, x) (find(ALL(ds), x) != begin(ds))
+#define AHAS(ds, x) (find(ALL(ds), x) != end(ds))
 
 #define REMIN(a, b) a = min(a, b);
 #define REMAX(a, b) a = max(a, b);

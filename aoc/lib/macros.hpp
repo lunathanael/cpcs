@@ -103,8 +103,7 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
 #define SORT(v) sort(ALL(v));
 #define REVERSE(v) reverse(ALL(v));
 #define FORTC(tc)                                                              \
-  unsigned int tc;                                                             \
-  tc = read_int<true>();                                                       \
+  wez(tc);                                                                     \
   while (tc--)
 
 #define HAS(v, x) (v.find(x) != v.end())

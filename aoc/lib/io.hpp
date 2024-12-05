@@ -47,38 +47,13 @@ ostream &operator<<(ostream &os, const T_container &v) {
   return os << '}';
 }
 
-/**
- * Author: chilli
- * License: CC0
- * Description: Read an integer from stdin. Usage requires your program to pipe
- * in input from file. Time: About 5x as fast as cin/scanf.
- */
-inline char gc() { // like getchar()
-  static char buf[1 << 16];
-  static size_t bc, be;
-  if (bc >= be) {
-    buf[0] = 0, bc = 0;
-    be = fread(buf, 1, sizeof(buf), stdin);
-  }
-  cout << "GC" << buf[bc + 1];
-  return buf[bc++]; // returns 0 on EOF
-}
-
-template <bool non_negative = false> int read_int() {
-  int a, c;
-  while ((a = gc()) < 40)
-    ;
-  if constexpr (!non_negative) {
-    if (a == '-') {
-      return -read_int<true>();
-    }
-  }
-  while ((c = gc()) >= 48)
-    a = a * 10 + c - 480;
-  return a - 48;
-}
-
-#define wez(n) int n = read_int();
-#define wez2(n, m) int n = read_int(), m = read_int();
-#define wez3(n, m, k) int n = read_int(), m = read_int(), k = read_int();
+#define wez(n)                                                                 \
+  int n;                                                                       \
+  cin >> n;
+#define wez2(n, m)                                                             \
+  int n, m;                                                                    \
+  cin >> n >> m;
+#define wez3(n, m, k)                                                          \
+  int n, m, k;                                                                 \
+  cin >> n >> m >> k;
 #endif

@@ -1,6 +1,6 @@
 6
-3
-abc
+5
+syyyy
 4
 xyyx
 8

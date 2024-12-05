@@ -50,9 +50,6 @@ struct hash_pair {
 int main() {
   IOSOPT;
   // Start here
-  FORTC(tc) {
-    
-  }
 
   return 0;
 }

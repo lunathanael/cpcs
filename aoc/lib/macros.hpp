@@ -25,8 +25,10 @@ using I64 = int64_t;
 using U64 = uint64_t;
 using F32 = float;
 using F64 = double;
+#ifdef __SIZEOF_INT128__
 using I128 = __int128_t;
 using U128 = __uint128_t;
+#endif
 
 using LL = long long;
 using ULL = unsigned long long;
@@ -101,9 +103,9 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
 #define SORT(v) sort(ALL(v));
 #define REVERSE(v) reverse(ALL(v));
 #define FORTC(tc)                                                              \
-  unsigned int t;                                                              \
-  t = read_int<true>();                                                        \
-  while (t--)
+  unsigned int tc;                                                             \
+  tc = read_int<true>();                                                       \
+  while (tc--)
 
 #define HAS(v, x) (v.find(x) != v.end())
 #define AHAS(ds, x) (find(ALL(ds), x) != begin(ds))

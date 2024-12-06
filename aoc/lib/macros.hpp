@@ -48,17 +48,17 @@ using STR = string;
 /*
 template <typename K, typename V> using UMP = unordered_map<K, V>;
 template <typename K, typename V> using UMP = __gnu_pbds::gp_hash_table<K, V>;
+template <typename T> using UST = unordered_set<T>;
 */
 
-template <typename T> using UST = unordered_set<T>;
 template <typename T> using PQ = priority_queue<T>;
 template <typename T> using PQI = priority_queue<T, vector<T>, greater<T>>;
 
 static const double PI = acos(-1);
 static constexpr const array<array<int, 2>, 4> DIRXY = {
-    {{0, 1}, {0, -1}, {1, 0}, {-1, 0}}};
+    {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};
 static constexpr const array<array<int, 2>, 8> DIRDIAG = {
-    {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}}};
+    {{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};
 
 #ifdef TESTING
 [[maybe_unused]] static int _GLOBAL_PRINT_COUNT = 0;
@@ -82,11 +82,11 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
   for (int a = static_cast<int>(b); a <= static_cast<int>(c); ++a)
 #define FORR(a, b, c)                                                          \
   for (int a = static_cast<int>(b); a >= static_cast<int>(c); --a)
-#define FORSR(a, b, c)                                                         \
+#define FORSQR(a, b, c)                                                        \
   for (int a = static_cast<int>(b); a * a <= static_cast<int>(c); ++a)
 #define FORC(a, b, c)                                                          \
   for (char a = static_cast<char>(b); a <= static_cast<char>(c); ++a)
-#define FORE(ele, ds) for (auto ele : ds)
+#define EACH(ele, ds) for (auto ele : ds)
 #define REP(i, n) FOR(i, 0, n)
 #define REPN(i, n) FORN(i, 1, n)
 #define REPR(i, n) FORR(i, n, 0)
@@ -98,7 +98,7 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
 #define pb push_back
 
 #define ALL(v) begin(v), end(v)
-#define ALLR(v) rbegin(v), rend(v)
+#define RALL(v) rbegin(v), rend(v)
 #define SZ(v) static_cast<int>(size(v))
 #define SORT(v) sort(ALL(v));
 #define REVERSE(v) reverse(ALL(v));

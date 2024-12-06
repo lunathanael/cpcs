@@ -2,10 +2,12 @@
 #define FAST_HASH_MAP
 
 #include <bits/extc++.h> /** keep-include */
+#include <bitset>
 #include <chrono>
 #include <cmath>
 #include <cstdint>
 #include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -46,5 +48,43 @@ template <typename K, typename V,
           typename Hash = std::conditional_t<std::is_integral_v<K>, _FHM_chash,
                                              std::hash<K>>>
 using UMP = __gnu_pbds::gp_hash_table<K, V, Hash>;
+template <typename K, typename V,
+          typename Hash = std::conditional_t<std::is_integral_v<K>, _FHM_chash,
+                                             std::hash<K>>>
+using UST = __gnu_pbds::gp_hash_table<K, __gnu_pbds::null_type, Hash>;
+
+template <class T, int SZ> struct SMALL_UMP {
+  vector<int> keys;
+  bitset<SZ> inside;
+  array<T, SZ> dat;
+  void clear() {
+    for (int t : keys) {
+      inside[t] = 0;
+    }
+    keys.clear();
+  }
+  T &operator[](int k) {
+    if (!inside[k]) {
+      inside[k] = 1;
+      keys.push_back(k);
+      dat[k] = 0;
+    }
+    return dat[k];
+  }
+  int size() const { return keys.size(); }
+  void insert(int k, T v) {
+    if (!inside[k]) {
+      inside[k] = 1;
+      keys.push_back(k);
+    }
+    dat[k] = v;
+  }
+  void erase(int k) {
+    if (inside[k]) {
+      inside[k] = 0;
+      keys.erase(find(keys.begin(), keys.end(), k));
+    }
+  }
+};
 
 #endif

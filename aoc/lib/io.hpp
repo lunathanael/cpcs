@@ -19,13 +19,6 @@ ostream &operator<<(ostream &os, pair<T, TT> t) {
   return os << "(" << t.fi << "," << t.se << ")";
 }
 
-template <typename T> ostream &operator<<(ostream &os, vector<T> vec) {
-  for (auto &ele : vec) {
-    os << ele << " ";
-  }
-  return os;
-}
-
 inline ifstream read_file(const string &filename) {
   ifstream file(filename, ios::in);
   if (!file.is_open()) {
@@ -45,6 +38,13 @@ ostream &operator<<(ostream &os, const T_container &v) {
     sep = ", ";
   };
   return os << '}';
+}
+
+template <typename T> void print(T x) { cout << x << endl; }
+
+template <typename T, typename... Args> void print(T first, Args... args) {
+  cout << first << " ";
+  print(args...);
 }
 
 #define wez(n)                                                                 \

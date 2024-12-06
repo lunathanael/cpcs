@@ -47,13 +47,34 @@ struct hash_pair {
   }
 };
 
+VS vs = read_aoc("in.txt");
+
+void process() {
+
+  static_cast<void>(vs);
+  return;
+}
+
+void part1() {
+  LL ans = 0;
+  print(vs);
+  static_cast<void>(ans);
+  return;
+}
+
+void part2() {
+  LL ans = 0;
+
+  static_cast<void>(ans);
+  return;
+}
+
 int main() {
   IOSOPT;
   // Start here
-  FORTC(tc) {
-    wez(n);
-    cout << n << endl;
-  }
+  process();
+  part1();
+  part2();
 
   return 0;
 }

@@ -47,74 +47,9 @@ struct hash_pair {
   }
 };
 
-VVL vvl;
-void process() {
-  // process 190: 10 19 into vector of vector of {190, 10, 19}
-  VS vs = read_aoc("in.txt");
-  EACH(const &s, vs) {
-    stringstream ss(s);
-    string tmp;
-    VL nums;
-    while (getline(ss, tmp, ':')) {
-      stringstream ss2(tmp);
-      LL num;
-      while (ss2 >> num) {
-        nums.pb(num);
-      }
-    }
-    vvl.pb(nums);
-  }
-}
-
-template <bool concat = false>
-bool dfs(const VL &row, long long curr, int idx = 1) {
-  if (idx == SZ(row) - 1) {
-    return curr == row[0];
-  }
-  if (curr >= row[0])
-    return false;
-  if constexpr (concat) {
-    if (dfs<true>(row, stoll(to_string(curr) + to_string(row[idx + 1])),
-                  idx + 1)) {
-      return true;
-    }
-  }
-  if (dfs<concat>(row, curr * row[idx + 1], idx + 1)) {
-    return true;
-  }
-  if (dfs<concat>(row, curr + row[idx + 1], idx + 1)) {
-    return true;
-  }
-  return false;
-};
-
-void part1() {
-  long long ans = accumulate(ALL(vvl), 0LL, [&](LL curr, const VL &row) {
-    if (dfs(row, row[1])) {
-      return curr + row[0];
-    }
-    return curr;
-  });
-  print(ans);
-}
-
-void part2() {
-  long long ans = accumulate(ALL(vvl), 0LL, [&](LL curr, const VL &row) {
-    if (dfs<true>(row, row[1])) {
-      return curr + row[0];
-    }
-    return curr;
-  });
-  print(ans);
-}
-
 int main() {
   IOSOPT;
   // Start here
-  // process();
-  fast_process();
-  part1();
-  part2();
 
   return 0;
 }

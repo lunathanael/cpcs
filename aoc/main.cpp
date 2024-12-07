@@ -48,139 +48,64 @@ struct hash_pair {
 };
 
 VS vs = read_aoc("in.txt");
-int posx, posy;
+VVL vvl;
 void process() {
-
-  REP(i, SZ(vs)) {
-    REP(j, SZ(vs[i])) {
-      if (vs[i][j] == '>' || vs[i][j] == '<' || vs[i][j] == '^' ||
-          vs[i][j] == 'v') {
-        posx = j;
-        posy = i;
-        break;
+  // process 190: 10 19 into vector of vector of {190, 10, 19}
+  for (const string &s : vs) {
+    stringstream ss(s);
+    string tmp;
+    VL nums;
+    while (getline(ss, tmp, ':')) {
+      stringstream ss2(tmp);
+      LL num;
+      while (ss2 >> num) {
+        nums.pb(num);
       }
     }
+    vvl.pb(nums);
   }
-  static_cast<void>(vs);
-  return;
 }
+
+template <bool concat = false>
+bool dfs(const VL &row, long long curr, int idx = 1) {
+  if (idx == SZ(row) - 1) {
+    return curr == row[0];
+  }
+  if (curr >= row[0])
+    return false;
+  if constexpr (concat) {
+    if (dfs<true>(row, stoll(to_string(curr) + to_string(row[idx + 1])),
+                  idx + 1)) {
+      return true;
+    }
+  }
+  if (dfs<concat>(row, curr * row[idx + 1], idx + 1)) {
+    return true;
+  }
+  if (dfs<concat>(row, curr + row[idx + 1], idx + 1)) {
+    return true;
+  }
+  return false;
+};
 
 void part1() {
-  LL ans = 0;
-  set<PLL> visited;
-
-  int dir = 0;
-  if (vs[posy][posx] == 'v')
-    dir = 0;
-  else if (vs[posy][posx] == '^')
-    dir = 1;
-  else if (vs[posy][posx] == '>')
-    dir = 2;
-  else if (vs[posy][posx] == '<')
-    dir = 3;
-  visited.insert({posx, posy});
-  while (true) {
-    int newposx = posx + DIRXY[dir][0];
-    int newposy = posy + DIRXY[dir][1];
-    if (!LINR(newposx, 0, SZ(vs[0]) - 1) || !LINR(newposy, 0, SZ(vs) - 1))
-      break;
-    if (vs[newposy][newposx] == '#') {
-      if (dir == 1)
-        dir = 2;
-      else if (dir == 3)
-        dir = 1;
-      else if (dir == 0)
-        dir = 3;
-      else if (dir == 2)
-        dir = 0;
-      continue;
+  long long ans = accumulate(ALL(vvl), 0LL, [&](LL curr, const VL &row) {
+    if (dfs(row, row[1])) {
+      return curr + row[0];
     }
-    posx = newposx;
-    posy = newposy;
-    visited.insert({posx, posy});
-  }
-
-  print(SZ(visited));
-  static_cast<void>(ans);
-  return;
-}
-
-bool help() {
-  LL ans = 0;
-  set<tuple<LL, LL, int>> visited;
-  int posx, posy;
-  REP(i, SZ(vs)) {
-    REP(j, SZ(vs[i])) {
-      if (vs[i][j] == '>' || vs[i][j] == '<' || vs[i][j] == '^' ||
-          vs[i][j] == 'v') {
-        posx = j;
-        posy = i;
-        break;
-      }
-    }
-  }
-
-  int dir = 0;
-  if (vs[posy][posx] == 'v')
-    dir = 0;
-  else if (vs[posy][posx] == '^')
-    dir = 1;
-  else if (vs[posy][posx] == '>')
-    dir = 2;
-  else if (vs[posy][posx] == '<')
-    dir = 3;
-  visited.insert({posx, posy, dir});
-  while (true) {
-    int newposx = posx + DIRXY[dir][0];
-    int newposy = posy + DIRXY[dir][1];
-    if (!LINR(newposx, 0, SZ(vs[0]) - 1) || !LINR(newposy, 0, SZ(vs) - 1))
-      break;
-    if (vs[newposy][newposx] == '#') {
-      if (dir == 1)
-        dir = 2;
-      else if (dir == 3)
-        dir = 1;
-      else if (dir == 0)
-        dir = 3;
-      else if (dir == 2)
-        dir = 0;
-      continue;
-    }
-    posx = newposx;
-    posy = newposy;
-    if (visited.find({posx, posy, dir}) != visited.end())
-      return false;
-    visited.insert({posx, posy, dir});
-  }
-  return true;
+    return curr;
+  });
+  print(ans);
 }
 
 void part2() {
-  LL ans = 0;
-  int posx, posy;
-  REP(i, SZ(vs)) {
-    REP(j, SZ(vs[i])) {
-      if (vs[i][j] == '>' || vs[i][j] == '<' || vs[i][j] == '^' ||
-          vs[i][j] == 'v') {
-        posx = j;
-        posy = i;
-        break;
-      }
+  long long ans = accumulate(ALL(vvl), 0LL, [&](LL curr, const VL &row) {
+    if (dfs<true>(row, row[1])) {
+      return curr + row[0];
     }
-  }
-
-  REP(i, SZ(vs)) {
-    REP(j, SZ(vs[i])) {
-      if (vs[i][j] != '.')
-        continue;
-      vs[i][j] = '#';
-      ans += !help();
-      vs[i][j] = '.';
-    }
-  }
-  cout << ans << endl;
-  static_cast<void>(ans);
-  return;
+    return curr;
+  });
+  print(ans);
 }
 
 int main() {

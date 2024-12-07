@@ -47,11 +47,11 @@ struct hash_pair {
   }
 };
 
-VS vs = read_aoc("in.txt");
 VVL vvl;
 void process() {
   // process 190: 10 19 into vector of vector of {190, 10, 19}
-  for (const string &s : vs) {
+  VS vs = read_aoc("in.txt");
+  EACH(const &s, vs) {
     stringstream ss(s);
     string tmp;
     VL nums;
@@ -111,7 +111,8 @@ void part2() {
 int main() {
   IOSOPT;
   // Start here
-  process();
+  // process();
+  fast_process();
   part1();
   part2();
 

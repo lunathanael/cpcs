@@ -28,6 +28,7 @@
 #include "lib/aoc.hpp"
 #include "lib/bitmanip.hpp"
 #include "lib/combinatorics.hpp"
+#include "lib/fasthashmap.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
 #include "lib/numbers.hpp"
@@ -47,10 +48,89 @@ struct hash_pair {
   }
 };
 
+VS vs = read_aoc("in.txt");
+UMP<char, VII> ump;
+
+void process() {
+  REP(i, SZ(vs)) {
+    REP(j, SZ(vs[i])) {
+      if (vs[i][j] != '.') {
+        ump[vs[i][j]].eb(i, j);
+      }
+    }
+  }
+}
+
+void part1() {
+  UST<PII, hash_pair> ust;
+  EACH(&pi, ump) {
+    auto &pairs = pi.se;
+    EACH(p1, pairs) {
+      EACH(p2, pairs) {
+        if (p1 == p2) {
+          continue;
+        }
+        int dx = p2.fi - p1.fi;
+        int dy = p2.se - p1.se;
+        ust.insert(mp(p1.fi - dx, p1.se - dy));
+        ust.insert(mp(p2.fi + dx, p2.se + dy));
+      }
+    }
+  }
+  LL ans = 0;
+  EACH(p, ust) {
+    if (LINR(p.fi, 0, SZ(vs) - 1) && LINR(p.se, 0, SZ(vs[0]) - 1)) {
+      ans++;
+    }
+  }
+  print(ans);
+}
+
+void part2() {
+  UST<PII, hash_pair> ust;
+  EACH(&pi, ump) {
+    auto pairs = pi.se;
+    EACH(p1, pairs) {
+      EACH(p2, pairs) {
+        if (p1 == p2) {
+          continue;
+        }
+        int dx = p2.fi - p1.fi;
+        int dy = p2.se - p1.se;
+
+        auto left = p1;
+        while (LINR(left.fi, 0, SZ(vs) - 1) &&
+               LINR(left.se, 0, SZ(vs[0]) - 1)) {
+          ust.insert(left);
+          left.fi -= dx;
+          left.se -= dy;
+        }
+
+        auto right = p2;
+        while (LINR(right.fi, 0, SZ(vs) - 1) &&
+               LINR(right.se, 0, SZ(vs[0]) - 1)) {
+          ust.insert(right);
+          right.fi += dx;
+          right.se += dy;
+        }
+      }
+    }
+  }
+  LL ans = 0;
+  EACH(p, ust) {
+    if (LINR(p.fi, 0, SZ(vs) - 1) && LINR(p.se, 0, SZ(vs[0]) - 1)) {
+      ans++;
+    }
+  }
+  print(ans);
+}
+
 int main() {
   IOSOPT;
   // Start here
-  UMP<string, int> ump;
+  process();
+  part1();
+  part2();
 
   return 0;
 }

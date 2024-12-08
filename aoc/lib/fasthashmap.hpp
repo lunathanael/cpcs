@@ -48,9 +48,8 @@ template <typename K, typename V,
           typename Hash = std::conditional_t<std::is_integral_v<K>, _FHM_chash,
                                              std::hash<K>>>
 using UMP = __gnu_pbds::gp_hash_table<K, V, Hash>;
-template <typename K, typename V,
-          typename Hash = std::conditional_t<std::is_integral_v<K>, _FHM_chash,
-                                             std::hash<K>>>
+template <typename K, typename Hash = std::conditional_t<
+                          std::is_integral_v<K>, _FHM_chash, std::hash<K>>>
 using UST = __gnu_pbds::gp_hash_table<K, __gnu_pbds::null_type, Hash>;
 
 template <class T, int SZ> struct SMALL_UMP {

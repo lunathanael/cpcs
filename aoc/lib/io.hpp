@@ -16,7 +16,7 @@ using namespace std;
 
 template <typename T, typename TT>
 ostream &operator<<(ostream &os, pair<T, TT> t) {
-  return os << "(" << t.fi << "," << t.se << ")";
+  return os << "(" << t.first << "," << t.second << ")";
 }
 
 inline ifstream read_file(const string &filename) {

@@ -98,6 +98,7 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
 #define se second
 #define mp make_pair
 #define pb push_back
+#define eb emplace_back
 
 #define ALL(v) begin(v), end(v)
 #define RALL(v) rbegin(v), rend(v)

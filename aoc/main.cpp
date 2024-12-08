@@ -50,6 +50,7 @@ struct hash_pair {
 int main() {
   IOSOPT;
   // Start here
+  UMP<string, int> ump;
 
   return 0;
 }

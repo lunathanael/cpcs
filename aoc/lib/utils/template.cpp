@@ -28,6 +28,7 @@
 #include "lib/aoc.hpp"
 #include "lib/bitmanip.hpp"
 #include "lib/combinatorics.hpp"
+#include "lib/fasthashmap.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
 #include "lib/numbers.hpp"

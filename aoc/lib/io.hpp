@@ -17,7 +17,7 @@ using namespace std;
 
 template <typename T, typename TT>
 ostream &operator<<(ostream &os, pair<T, TT> t) {
-  return os << "(" << t.first << "," << t.second << ")";
+  return os << "(" << t.first << ", " << t.second << ")";
 }
 
 template <typename... Args>
@@ -25,7 +25,7 @@ ostream &operator<<(ostream &os, const tuple<Args...> &t) {
   os << "(";
   apply([&os](const auto &...args) {
     size_t n{0};
-    ((os << (n++ ? "," : "") << args), ...);
+    ((os << (n++ ? ", " : "") << args), ...);
   }, t);
   return os << ")";
 }

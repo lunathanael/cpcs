@@ -35,6 +35,7 @@
 #include "lib/matrix.hpp"
 #include "lib/numbers.hpp"
 #include "lib/segment_tree.hpp"
+#include "lib/linear_equations.hpp"
 /* END OPTIONAL INCLUDES */
 
 using namespace std;
@@ -72,10 +73,15 @@ int main() {
 
   Matrix<LL, 3, 3> m2(m);
   print(m2 ^ 10);
-  LL vv = 0;
 
   print(m2.det());
   print(m2.inverse());
+
+  print(m2, v);
+  print(solveLinear(m, v));
+  
+  print(m2);
+  print(m2 * solveLinear(m, v).first);
 
   return 0;
 }

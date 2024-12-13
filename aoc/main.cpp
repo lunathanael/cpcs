@@ -17,6 +17,7 @@
 #include <set>
 #include <sstream>
 #include <string>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
@@ -31,6 +32,7 @@
 #include "lib/fasthashmap.hpp"
 #include "lib/io.hpp"
 #include "lib/macros.hpp"
+#include "lib/matrix.hpp"
 #include "lib/numbers.hpp"
 #include "lib/segment_tree.hpp"
 /* END OPTIONAL INCLUDES */
@@ -51,6 +53,25 @@ struct hash_pair {
 int main() {
   IOSOPT;
   // Start here
+  Matrix<int, 3, 3> m;
+  m[0][0] = 1;
+  m[0][1] = 2;
+  m[0][2] = 3;
+  m[1][0] = 4;
+  m[1][1] = 5;
+  m[1][2] = 6;
+  m[2][0] = 7;
+  m[2][1] = 8;
+  m[2][2] = 9;
+  print(m);
+  print(m * m);
+  Vector<int, 3> v(10);
+  print(v);
+  print(m * v);
+
+  Matrix<LL, 3, 3> m2(m);
+  print(m2 ^ 10);
+  LL vv = 0;
 
   return 0;
 }

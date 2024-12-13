@@ -21,6 +21,7 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <tuple>
 
 #define FHM_RANDOMIZE false
 
@@ -33,6 +34,7 @@
 #include "lib/macros.hpp"
 #include "lib/numbers.hpp"
 #include "lib/segment_tree.hpp"
+#include "lib/matrix.hpp"
 /* END OPTIONAL INCLUDES */
 
 using namespace std;

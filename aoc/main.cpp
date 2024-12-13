@@ -35,7 +35,8 @@
 #include "lib/matrix.hpp"
 #include "lib/numbers.hpp"
 #include "lib/segment_tree.hpp"
-#include "lib/linear_equations.hpp"
+#include "lib/system_equations.hpp"
+#include "lib/index_hacks.hpp"
 /* END OPTIONAL INCLUDES */
 
 using namespace std;
@@ -51,37 +52,58 @@ struct hash_pair {
   }
 };
 
+VS vs = read_aoc("in.txt");
+VT<PLL, PLL, PLL> vt;
+
+void process() {
+  REP(i, (SZ(vs) + 1) / 4) {
+    string a = vs[i * 4];
+    string b = vs[i * 4 + 1];
+    string p = vs[i * 4 + 2];
+    
+    auto parse_coords = [](const string& s) {
+      size_t x_pos = s.find('X');
+      size_t y_pos = s.find('Y');
+      
+      size_t x_start = s.find_first_of("+=", x_pos) + 1;
+      size_t x_end = s.find(',', x_start);
+      size_t y_start = s.find_first_of("+=", y_pos) + 1;
+      size_t y_end = s.length();
+      
+      return PLL{
+        stoll(s.substr(x_start, x_end - x_start)),
+        stoll(s.substr(y_start, y_end - y_start))
+      };
+    };
+    
+    PLL buttonA = parse_coords(a);
+    PLL buttonB = parse_coords(b);
+    PLL prize = parse_coords(p);
+    
+    vt.eb(buttonA, buttonB, prize);
+  }
+}
+
+void part1() {
+  LL ans1 = 0;
+
+  EACH(&tup, vt) {
+    PLL buttonA = tup[0_];
+
+    Vector buttonA_vec = {buttonA[0_], buttonA[0_]};
+    print(buttonA_vec);
+  }
+
+}
 
 int main() {
   IOSOPT;
   // Start here
-  Matrix<int, 3, 3> m;
-  m[0][0] = 1;
-  m[0][1] = 2;
-  m[0][2] = 3;
-  m[1][0] = 4;
-  m[1][1] = 5;
-  m[1][2] = 6;
-  m[2][0] = 7;
-  m[2][1] = 8;
-  m[2][2] = 0;
+  process();
+  part1();
+
+  Matrix m = {{0, 1, 1},{2, 3, 4}};
   print(m);
-  print(m * m);
-  Vector<int, 3> v(10);
-  print(v);
-  print(m * v);
-
-  Matrix<LL, 3, 3> m2(m);
-  print(m2 ^ 10);
-
-  print(m2.det());
-  print(m2.inverse());
-
-  print(m2, v);
-  print(solveLinear(m, v));
-  
-  print(m2);
-  print(m2 * solveLinear(m, v).first);
 
   return 0;
 }

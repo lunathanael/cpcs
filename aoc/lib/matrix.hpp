@@ -17,7 +17,11 @@ template <class T, size_t N> struct Vector : array<T, N> {
 
   constexpr Vector(const T val = T{}) { this->fill(val); }
 
-    template <typename OT, typename ENABLE = enable_if<!is_same_v<T, OT>, OT>>
+  constexpr Vector(const initializer_list<T> &init) {
+    copy(init.begin(), init.end(), this->begin());
+  }
+
+  template <typename OT, typename ENABLE = enable_if<!is_same_v<T, OT>, OT>>
   constexpr Vector(const Vector<OT, N> &m) {
     for (size_t i = 0; i < N; ++i) {
       (*this)[i] = static_cast<T>(m[i]);
@@ -48,6 +52,9 @@ template <class T, size_t N> struct Vector : array<T, N> {
     return ret;
   }
 };
+
+template <typename T, typename... U>
+Vector(T, U...) -> Vector<T, 1 + sizeof...(U)>;
 
 template <class T, size_t ROWS, size_t COLS> struct Matrix {
   Vector<Vector<T, COLS>, ROWS> data;
@@ -248,5 +255,7 @@ template <class T, size_t ROWS, size_t COLS> struct Matrix {
     return os;
   }
 };
+
+
 
 #endif

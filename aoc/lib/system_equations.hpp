@@ -11,7 +11,7 @@ using namespace std;
 template <typename T, typename U, size_t ROWS, size_t COLS,
           typename enable_if<is_convertible_v<T, double>, bool>::type = true,
           typename enable_if<is_convertible_v<U, double>, bool>::type = true>
-pair<Vector<double, COLS>, int> solveLinear(Matrix<T, ROWS, COLS> &matrix,
+pair<Vector<double, COLS>, int> solve_linear(Matrix<T, ROWS, COLS> &matrix,
                                             Vector<U, COLS> &target) {
   Matrix<double, ROWS, COLS> A(matrix);
   Vector<double, COLS> b(target);

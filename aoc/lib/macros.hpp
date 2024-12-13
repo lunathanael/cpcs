@@ -16,6 +16,7 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <tuple>
 
 using namespace std;
 
@@ -38,16 +39,21 @@ using LL = long long;
 using ULL = unsigned long long;
 using STR = string;
 
-using PII = pair<int, int>;
-using PLL = pair<LL, LL>;
-using PSS = pair<STR, STR>;
 using VI = vector<int>;
 using VVI = vector<VI>;
-using VII = vector<PII>;
 using VL = vector<LL>;
 using VVL = vector<VL>;
-using VLL = vector<PLL>;
 using VS = vector<STR>;
+
+// using PII = pair<int, int>;
+// using PLL = pair<LL, LL>;
+// using PSS = pair<STR, STR>;
+
+// using VLL = vector<PLL>;
+// using VII = vector<PII>;
+
+// template <typename... Args> using VT = vector<tuple<Args...>>;
+
 
 /*
 template <typename K, typename V> using UMP = unordered_map<K, V>;

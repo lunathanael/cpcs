@@ -19,6 +19,10 @@
 
 using namespace std;
 
+static constexpr const int E9_7 = 1e9 + 7;
+static constexpr const double EPS = 1e-9;
+
+
 using I32 = int32_t;
 using U32 = uint32_t;
 using I64 = int64_t;
@@ -152,5 +156,6 @@ static constexpr const array<array<int, 2>, 8> DIRDIAG = {
 #define bi_parity(x) __builtin_parity(x)
 #define bi_parityl(x) __builtin_parityl(x)
 #define bi_parityll(x) __builtin_parityll(x)
+
 
 #endif

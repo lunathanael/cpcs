@@ -50,6 +50,7 @@ struct hash_pair {
   }
 };
 
+
 int main() {
   IOSOPT;
   // Start here
@@ -62,7 +63,7 @@ int main() {
   m[1][2] = 6;
   m[2][0] = 7;
   m[2][1] = 8;
-  m[2][2] = 9;
+  m[2][2] = 0;
   print(m);
   print(m * m);
   Vector<int, 3> v(10);
@@ -72,6 +73,9 @@ int main() {
   Matrix<LL, 3, 3> m2(m);
   print(m2 ^ 10);
   LL vv = 0;
+
+  print(m2.det());
+  print(m2.inverse());
 
   return 0;
 }

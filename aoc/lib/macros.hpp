@@ -32,18 +32,18 @@ using U128 = __uint128_t;
 
 using LL = long long;
 using ULL = unsigned long long;
+using STR = string;
 
 using PII = pair<int, int>;
 using PLL = pair<LL, LL>;
-using PSS = pair<string, string>;
+using PSS = pair<STR, STR>;
 using VI = vector<int>;
 using VVI = vector<VI>;
 using VII = vector<PII>;
 using VL = vector<LL>;
 using VVL = vector<VL>;
 using VLL = vector<PLL>;
-using VS = vector<string>;
-using STR = string;
+using VS = vector<STR>;
 
 /*
 template <typename K, typename V> using UMP = unordered_map<K, V>;

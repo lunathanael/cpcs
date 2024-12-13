@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra
+CXXFLAGS = -std=c++17 -Wall -Wextra -march=native
 DEBUG_FLAGS = -DTESTING -Wconversion -Werror -pedantic -g -g3 -DDEBUG -D_GLIBCXX_DEBUG -fsanitize=address,undefined
 RELEASE_FLAGS = -Ofast -DNDEBUG
 

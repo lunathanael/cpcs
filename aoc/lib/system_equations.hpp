@@ -1,9 +1,14 @@
-#ifndef LINEAR_EQUATIONS_HPP
-#define LINEAR_EQUATIONS_HPP
+#ifndef SYSTEM_EQUATIONS_HPP
+#define SYSTEM_EQUATIONS_HPP
 
 #ifndef MATRIX_HPP
 #include "matrix.hpp"
-#warning "Please include matrix.hpp before linear_equations.hpp"
+#warning "Please include matrix.hpp before system_equations.hpp"
+#endif
+
+#ifndef INDEX_HACKS_HPP
+#include "index_hacks.hpp"
+#warning "Please include index_hacks.hpp before system_equations.hpp"
 #endif
 
 using namespace std;
@@ -11,8 +16,8 @@ using namespace std;
 template <typename T, typename U, size_t ROWS, size_t COLS,
           typename enable_if<is_convertible_v<T, double>, bool>::type = true,
           typename enable_if<is_convertible_v<U, double>, bool>::type = true>
-pair<Vector<double, COLS>, int> solve_linear(Matrix<T, ROWS, COLS> &matrix,
-                                            Vector<U, COLS> &target) {
+Pair<Vector<double, COLS>, int> solve_linear(Matrix<T, ROWS, COLS> &matrix,
+                                             Vector<U, COLS> &target) {
   Matrix<double, ROWS, COLS> A(matrix);
   Vector<double, COLS> b(target);
   constexpr const size_t n = ROWS, m = COLS;
@@ -30,9 +35,9 @@ pair<Vector<double, COLS>, int> solve_linear(Matrix<T, ROWS, COLS> &matrix,
           br = r, bc = c, bv = v;
       }
     }
-    if (bv <= _MATRIX_EPS) {
+    if (bv <= internal::MATRIX_EPS) {
       for (size_t j = i; j < n; ++j)
-        if (fabs(b[j]) > _MATRIX_EPS)
+        if (fabs(b[j]) > internal::MATRIX_EPS)
           return {x, -1};
       break;
     }

@@ -20,9 +20,6 @@
 
 using namespace std;
 
-static constexpr const int E9_7 = 1e9 + 7;
-static constexpr const double EPS = 1e-9;
-
 
 using I32 = int32_t;
 using U32 = uint32_t;
@@ -44,6 +41,9 @@ using VVI = vector<VI>;
 using VL = vector<LL>;
 using VVL = vector<VL>;
 using VS = vector<STR>;
+
+template <typename T1, typename T2>
+struct Pair;
 
 // using PII = pair<int, int>;
 // using PLL = pair<LL, LL>;

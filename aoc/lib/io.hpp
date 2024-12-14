@@ -10,8 +10,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <vector>
 #include <tuple>
+#include <vector>
 
 using namespace std;
 
@@ -23,10 +23,12 @@ ostream &operator<<(ostream &os, pair<T, TT> t) {
 template <typename... Args>
 ostream &operator<<(ostream &os, const tuple<Args...> &t) {
   os << "(";
-  apply([&os](const auto &...args) {
-    size_t n{0};
-    ((os << (n++ ? ", " : "") << args), ...);
-  }, t);
+  apply(
+      [&os](const auto &...args) {
+        size_t n{0};
+        ((os << (n++ ? ", " : "") << args), ...);
+      },
+      t);
   return os << ")";
 }
 

@@ -11,7 +11,9 @@
 
 using namespace std;
 
-static constexpr const double _MATRIX_EPS = 1e-12;
+namespace internal {
+static constexpr const double MATRIX_EPS = 1e-12;
+}
 
 template <class T, size_t N> struct Vector : array<T, N> {
 
@@ -38,7 +40,7 @@ template <class T, size_t N> struct Vector : array<T, N> {
 
   constexpr Vector operator*(const T val) const {
     Vector<T, N> ret;
-    for (int i = 0; i < N; ++i) {
+    for (size_t i = 0; i < N; ++i) {
       ret[i] = (*this)[i] * val;
     }
     return ret;
@@ -46,7 +48,7 @@ template <class T, size_t N> struct Vector : array<T, N> {
 
   constexpr Vector operator+(const Vector &v) const {
     Vector<T, N> ret;
-    for (int i = 0; i < N; ++i) {
+    for (size_t i = 0; i < N; ++i) {
       ret[i] = (*this)[i] + v[i];
     }
     return ret;
@@ -193,7 +195,7 @@ template <class T, size_t ROWS, size_t COLS> struct Matrix {
             r = j, c = k;
         }
       }
-      if (fabs(A[r][c]) < _MATRIX_EPS)
+      if (fabs(A[r][c]) < internal::MATRIX_EPS)
         return {A, i};
       A[i].swap(A[r]);
       tmp[i].swap(tmp[r]);
@@ -254,8 +256,11 @@ template <class T, size_t ROWS, size_t COLS> struct Matrix {
     }
     return os;
   }
+
+  Vector<T, COLS> *begin() { return data.begin(); }
+  Vector<T, COLS> *end() { return data.end(); }
+  const Vector<T, COLS> *begin() const { return data.begin(); }
+  const Vector<T, COLS> *end() const { return data.end(); }
 };
-
-
 
 #endif

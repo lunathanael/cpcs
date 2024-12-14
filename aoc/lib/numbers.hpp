@@ -2,6 +2,7 @@
 #define NUMBERS_HPP
 
 #include <array>
+#include <cmath>
 #include <vector>
 
 using namespace std;
@@ -12,6 +13,12 @@ using namespace std;
  * Source: folklore
  */
 static constexpr const long long MOD1e9_7 = 1000000007; // faster if const
+static constexpr const double EPS = 1e-9;
+
+template <typename T, enable_if_t<is_same_v<T, double>, bool> = true>
+constexpr bool is_int(const T d) {
+  return fabs(d - round(d)) < EPS;
+}
 
 constexpr long long modpow(long long b, long long e) {
   long long ans = 1;

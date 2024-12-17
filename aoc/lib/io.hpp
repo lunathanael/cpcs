@@ -14,24 +14,6 @@
 #include <vector>
 
 using namespace std;
-
-template <typename T, typename TT>
-ostream &operator<<(ostream &os, pair<T, TT> t) {
-  return os << "(" << t.first << ", " << t.second << ")";
-}
-
-template <typename... Args>
-ostream &operator<<(ostream &os, const tuple<Args...> &t) {
-  os << "(";
-  apply(
-      [&os](const auto &...args) {
-        size_t n{0};
-        ((os << (n++ ? ", " : "") << args), ...);
-      },
-      t);
-  return os << ")";
-}
-
 inline ifstream read_file(const string &filename) {
   ifstream file(filename, ios::in);
   if (!file.is_open()) {
@@ -52,6 +34,25 @@ ostream &operator<<(ostream &os, const T_container &v) {
   };
   return os << '}';
 }
+
+
+template <typename T, typename TT>
+ostream &operator<<(ostream &os, pair<T, TT> t) {
+  return os << "(" << t.first << ", " << t.second << ")";
+}
+
+template <typename... Args>
+ostream &operator<<(ostream &os, const tuple<Args...> &t) {
+  os << "(";
+  apply(
+      [&os](const auto &...args) {
+        size_t n{0};
+        ((os << (n++ ? ", " : "") << args), ...);
+      },
+      t);
+  return os << ")";
+}
+
 
 template <typename T> void print(T x) { cout << x << endl; }
 

@@ -43,10 +43,10 @@ template <typename T> struct Point {
   Point(const initializer_list<T> &init) : x(init.begin()[0]), y(init.begin()[1]) {}
   Point(const array<T, 2> &arr) : x(arr[0]), y(arr[1]) {}
   Point(const Vector<T, 2> &vec) : x(vec[0]), y(vec[1]) {}
-   Point& operator=(const pair<T, T> &p) { x = p.first; y = p.second; }
 
-  bool operator<(Point p) const { return tie(x, y) < tie(p.x, p.y); }
-  bool operator==(Point p) const { return tie(x, y) == tie(p.x, p.y); }
+  bool operator<(const Point p) const { return tie(x, y) < tie(p.x, p.y); }
+  bool operator==(const Point p) const { return tie(x, y) == tie(p.x, p.y); }
+  bool operator!=(const Point p) const { return !(*this == p); }
   Point operator+(Point p) const { return Point(x + p.x, y + p.y); }
   Point operator-(Point p) const { return Point(x - p.x, y - p.y); }
   Point operator*(T d) const { return Point(x * d, y * d); }

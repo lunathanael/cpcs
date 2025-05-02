@@ -2,9 +2,11 @@ param (
     [string]$fileName
 )
 
+$defaultName = "main"
+
 if (-not $fileName) {
-    Write-Error "No file name provided. Usage: .\scriptName.ps1 [-fileName] <name>"
-    exit
+    Write-Warning "No file name provided. Using default name: ${defaultName}"
+    $fileName = $defaultName
 }
 
 $templatePath = "./template.txt"

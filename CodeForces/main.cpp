@@ -44,15 +44,28 @@ int main()
     int tc;
     cin >> tc;
     while (tc--) {
-        int n;
-        cin >> n;
-        int sum = 0;
-        for(int i = n; i >= 1; --i) {
-            sum += abs(i - (n - i + 1));
+        int n, x;
+        cin >> n >> x;
+
+        if (x == 0 && n == 1) {
+            cout << -1 << '\n';
+        } else {
+            int a = __builtin_popcount(x);
+            if (a > n) {
+                cout << x << '\n';
+            } else {
+                if ((n-a) % 2 == 0 || a > 1 || (a == 1 && x % 2 == 0))
+                {
+                    cout << x + (n-a + 1) / 2 * 2 << '\n';
+                }
+                else
+                {
+                    cout << x + (n-a - 1) + 4 << '\n';
+                }
+            }
         }
-        cout << sum / 2 + 1<< '\n';
+        
     }
-    
 
     return 0;
 }

@@ -12,7 +12,7 @@ if ($src -eq "") {
     make $target SRC=$src
 }
 
-$output = Get-Content input.txt | .\a.exe
+$output = Get-Content input.txt | .\main.exe
 
 if ($check) {
     $tempFile = "temp_output.txt"

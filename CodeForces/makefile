@@ -1,4 +1,4 @@
-NAME=a
+NAME=main
 SRC ?= $(wildcard *.cpp)
 
 all :

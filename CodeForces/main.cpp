@@ -41,6 +41,18 @@ struct hash_pair {
 int main()
 {
     // Start here
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int n;
+        cin >> n;
+        int sum = 0;
+        for(int i = n; i >= 1; --i) {
+            sum += abs(i - (n - i + 1));
+        }
+        cout << sum / 2 + 1<< '\n';
+    }
+    
 
     return 0;
 }

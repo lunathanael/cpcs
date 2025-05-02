@@ -1,10 +1,10 @@
 param(
     [String]$src = "",
-    [Switch]$fast,
+    [Switch]$slow,
     [Switch]$check
 )
 
-$target = if ($fast) { "fast" } else { "all" }
+$target = if ($slow) { "all" } else { "fast" }
 
 if ($src -eq "") {
     make $target
